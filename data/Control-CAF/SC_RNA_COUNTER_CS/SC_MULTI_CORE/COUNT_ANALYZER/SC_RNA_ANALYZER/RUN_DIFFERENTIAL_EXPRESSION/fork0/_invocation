@@ -1,0 +1,9 @@
+@include "rna/_cr_ana_stages.mro"
+
+call RUN_DIFFERENTIAL_EXPRESSION_NG as RUN_DIFFERENTIAL_EXPRESSION(
+    matrix_h5        = "/anvil/scratch/x-liu2302/unit1_demo/data/cellranger/Control-CAF/SC_RNA_COUNTER_CS/SC_MULTI_CORE/COUNT_ANALYZER/SC_RNA_ANALYZER/PREPROCESS_MATRIX/fork0/join-u6a73c7eee8/files/preprocessed_matrix_h5.h5",
+    clustering_h5    = "/anvil/scratch/x-liu2302/unit1_demo/data/cellranger/Control-CAF/SC_RNA_COUNTER_CS/SC_MULTI_CORE/COUNT_ANALYZER/SC_RNA_ANALYZER/COMBINE_CLUSTERING/fork0/chnk0-u6a73c7ef03/files/clustering_h5.h5",
+    random_seed      = null,
+    max_clusters     = null,
+    is_antibody_only = false,
+)

@@ -1,0 +1,282 @@
+[
+    {
+        "cluster_keys": [
+            {
+                "cluster_id": 1,
+                "cluster_type": "kmeans_2_clusters"
+            },
+            {
+                "cluster_id": 2,
+                "cluster_type": "kmeans_2_clusters"
+            },
+            {
+                "cluster_id": 1,
+                "cluster_type": "kmeans_3_clusters"
+            },
+            {
+                "cluster_id": 2,
+                "cluster_type": "kmeans_3_clusters"
+            },
+            {
+                "cluster_id": 3,
+                "cluster_type": "kmeans_3_clusters"
+            },
+            {
+                "cluster_id": 1,
+                "cluster_type": "kmeans_4_clusters"
+            },
+            {
+                "cluster_id": 2,
+                "cluster_type": "kmeans_4_clusters"
+            },
+            {
+                "cluster_id": 3,
+                "cluster_type": "kmeans_4_clusters"
+            }
+        ]
+    },
+    {
+        "cluster_keys": [
+            {
+                "cluster_id": 4,
+                "cluster_type": "kmeans_4_clusters"
+            },
+            {
+                "cluster_id": 1,
+                "cluster_type": "kmeans_5_clusters"
+            },
+            {
+                "cluster_id": 2,
+                "cluster_type": "kmeans_5_clusters"
+            },
+            {
+                "cluster_id": 3,
+                "cluster_type": "kmeans_5_clusters"
+            },
+            {
+                "cluster_id": 4,
+                "cluster_type": "kmeans_5_clusters"
+            },
+            {
+                "cluster_id": 5,
+                "cluster_type": "kmeans_5_clusters"
+            },
+            {
+                "cluster_id": 1,
+                "cluster_type": "kmeans_6_clusters"
+            },
+            {
+                "cluster_id": 2,
+                "cluster_type": "kmeans_6_clusters"
+            }
+        ]
+    },
+    {
+        "cluster_keys": [
+            {
+                "cluster_id": 3,
+                "cluster_type": "kmeans_6_clusters"
+            },
+            {
+                "cluster_id": 4,
+                "cluster_type": "kmeans_6_clusters"
+            },
+            {
+                "cluster_id": 5,
+                "cluster_type": "kmeans_6_clusters"
+            },
+            {
+                "cluster_id": 6,
+                "cluster_type": "kmeans_6_clusters"
+            },
+            {
+                "cluster_id": 1,
+                "cluster_type": "kmeans_7_clusters"
+            },
+            {
+                "cluster_id": 2,
+                "cluster_type": "kmeans_7_clusters"
+            },
+            {
+                "cluster_id": 3,
+                "cluster_type": "kmeans_7_clusters"
+            },
+            {
+                "cluster_id": 4,
+                "cluster_type": "kmeans_7_clusters"
+            }
+        ]
+    },
+    {
+        "cluster_keys": [
+            {
+                "cluster_id": 5,
+                "cluster_type": "kmeans_7_clusters"
+            },
+            {
+                "cluster_id": 6,
+                "cluster_type": "kmeans_7_clusters"
+            },
+            {
+                "cluster_id": 7,
+                "cluster_type": "kmeans_7_clusters"
+            },
+            {
+                "cluster_id": 1,
+                "cluster_type": "kmeans_8_clusters"
+            },
+            {
+                "cluster_id": 2,
+                "cluster_type": "kmeans_8_clusters"
+            },
+            {
+                "cluster_id": 3,
+                "cluster_type": "kmeans_8_clusters"
+            },
+            {
+                "cluster_id": 4,
+                "cluster_type": "kmeans_8_clusters"
+            },
+            {
+                "cluster_id": 5,
+                "cluster_type": "kmeans_8_clusters"
+            }
+        ]
+    },
+    {
+        "cluster_keys": [
+            {
+                "cluster_id": 6,
+                "cluster_type": "kmeans_8_clusters"
+            },
+            {
+                "cluster_id": 7,
+                "cluster_type": "kmeans_8_clusters"
+            },
+            {
+                "cluster_id": 8,
+                "cluster_type": "kmeans_8_clusters"
+            },
+            {
+                "cluster_id": 1,
+                "cluster_type": "kmeans_9_clusters"
+            },
+            {
+                "cluster_id": 2,
+                "cluster_type": "kmeans_9_clusters"
+            },
+            {
+                "cluster_id": 3,
+                "cluster_type": "kmeans_9_clusters"
+            },
+            {
+                "cluster_id": 4,
+                "cluster_type": "kmeans_9_clusters"
+            },
+            {
+                "cluster_id": 5,
+                "cluster_type": "kmeans_9_clusters"
+            }
+        ]
+    },
+    {
+        "cluster_keys": [
+            {
+                "cluster_id": 6,
+                "cluster_type": "kmeans_9_clusters"
+            },
+            {
+                "cluster_id": 7,
+                "cluster_type": "kmeans_9_clusters"
+            },
+            {
+                "cluster_id": 8,
+                "cluster_type": "kmeans_9_clusters"
+            },
+            {
+                "cluster_id": 9,
+                "cluster_type": "kmeans_9_clusters"
+            },
+            {
+                "cluster_id": 1,
+                "cluster_type": "kmeans_10_clusters"
+            },
+            {
+                "cluster_id": 2,
+                "cluster_type": "kmeans_10_clusters"
+            },
+            {
+                "cluster_id": 3,
+                "cluster_type": "kmeans_10_clusters"
+            },
+            {
+                "cluster_id": 4,
+                "cluster_type": "kmeans_10_clusters"
+            }
+        ]
+    },
+    {
+        "cluster_keys": [
+            {
+                "cluster_id": 5,
+                "cluster_type": "kmeans_10_clusters"
+            },
+            {
+                "cluster_id": 6,
+                "cluster_type": "kmeans_10_clusters"
+            },
+            {
+                "cluster_id": 7,
+                "cluster_type": "kmeans_10_clusters"
+            },
+            {
+                "cluster_id": 8,
+                "cluster_type": "kmeans_10_clusters"
+            },
+            {
+                "cluster_id": 9,
+                "cluster_type": "kmeans_10_clusters"
+            },
+            {
+                "cluster_id": 10,
+                "cluster_type": "kmeans_10_clusters"
+            },
+            {
+                "cluster_id": 1,
+                "cluster_type": "graphclust"
+            },
+            {
+                "cluster_id": 2,
+                "cluster_type": "graphclust"
+            }
+        ]
+    },
+    {
+        "cluster_keys": [
+            {
+                "cluster_id": 3,
+                "cluster_type": "graphclust"
+            },
+            {
+                "cluster_id": 4,
+                "cluster_type": "graphclust"
+            },
+            {
+                "cluster_id": 5,
+                "cluster_type": "graphclust"
+            },
+            {
+                "cluster_id": 6,
+                "cluster_type": "graphclust"
+            },
+            {
+                "cluster_id": 7,
+                "cluster_type": "graphclust"
+            },
+            {
+                "cluster_id": 8,
+                "cluster_type": "graphclust"
+            }
+        ]
+    }
+]

@@ -1,0 +1,11 @@
+{
+  "bc_correct_summary": "/anvil/scratch/x-liu2302/unit1_demo/data/cellranger/Control-CAF/SC_RNA_COUNTER_CS/SC_MULTI_CORE/MULTI_GEM_WELL_PROCESSOR/COUNT_GEM_WELL_PROCESSOR/_BASIC_SC_RNA_COUNTER/_MATRIX_COMPUTER/MAKE_SHARD/fork0/chnk0-u6a73c7e8f3/files/bc_correct_summary.bcm.bincode",
+  "chunk_hist": "/anvil/scratch/x-liu2302/unit1_demo/data/cellranger/Control-CAF/SC_RNA_COUNTER_CS/SC_MULTI_CORE/MULTI_GEM_WELL_PROCESSOR/COUNT_GEM_WELL_PROCESSOR/_BASIC_SC_RNA_COUNTER/_MATRIX_COMPUTER/MAKE_SHARD/fork0/chnk0-u6a73c7e8f3/files/chunk_hist.msh.bincode",
+  "chunk_summary": "/anvil/scratch/x-liu2302/unit1_demo/data/cellranger/Control-CAF/SC_RNA_COUNTER_CS/SC_MULTI_CORE/MULTI_GEM_WELL_PROCESSOR/COUNT_GEM_WELL_PROCESSOR/_BASIC_SC_RNA_COUNTER/_MATRIX_COMPUTER/MAKE_SHARD/fork0/chnk0-u6a73c7e8f3/files/chunk_summary.msm.bincode",
+  "feature_counts": "/anvil/scratch/x-liu2302/unit1_demo/data/cellranger/Control-CAF/SC_RNA_COUNTER_CS/SC_MULTI_CORE/MULTI_GEM_WELL_PROCESSOR/COUNT_GEM_WELL_PROCESSOR/_BASIC_SC_RNA_COUNTER/_MATRIX_COMPUTER/MAKE_SHARD/fork0/chnk0-u6a73c7e8f3/files/feature_counts.fbc.bincode",
+  "invalid_shard": "/anvil/scratch/x-liu2302/unit1_demo/data/cellranger/Control-CAF/SC_RNA_COUNTER_CS/SC_MULTI_CORE/MULTI_GEM_WELL_PROCESSOR/COUNT_GEM_WELL_PROCESSOR/_BASIC_SC_RNA_COUNTER/_MATRIX_COMPUTER/MAKE_SHARD/fork0/chnk0-u6a73c7e8f3/files/invalid.shard",
+  "read_prefix_counts": "/anvil/scratch/x-liu2302/unit1_demo/data/cellranger/Control-CAF/SC_RNA_COUNTER_CS/SC_MULTI_CORE/MULTI_GEM_WELL_PROCESSOR/COUNT_GEM_WELL_PROCESSOR/_BASIC_SC_RNA_COUNTER/_MATRIX_COMPUTER/MAKE_SHARD/fork0/chnk0-u6a73c7e8f3/files/read_prefix_counts.rpc",
+  "total_read_pairs": 57966040,
+  "umi_counts": "/anvil/scratch/x-liu2302/unit1_demo/data/cellranger/Control-CAF/SC_RNA_COUNTER_CS/SC_MULTI_CORE/MULTI_GEM_WELL_PROCESSOR/COUNT_GEM_WELL_PROCESSOR/_BASIC_SC_RNA_COUNTER/_MATRIX_COMPUTER/MAKE_SHARD/fork0/chnk0-u6a73c7e8f3/files/umi_counts.umi",
+  "valid_shard": "/anvil/scratch/x-liu2302/unit1_demo/data/cellranger/Control-CAF/SC_RNA_COUNTER_CS/SC_MULTI_CORE/MULTI_GEM_WELL_PROCESSOR/COUNT_GEM_WELL_PROCESSOR/_BASIC_SC_RNA_COUNTER/_MATRIX_COMPUTER/MAKE_SHARD/fork0/chnk0-u6a73c7e8f3/files/valid.shard"
+}

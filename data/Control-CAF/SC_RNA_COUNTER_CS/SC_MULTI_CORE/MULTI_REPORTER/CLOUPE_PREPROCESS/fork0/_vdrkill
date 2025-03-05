@@ -1,0 +1,29 @@
+{
+    "count": 3,
+    "size": 81856264,
+    "timestamp": "2025-03-05 01:29:07",
+    "paths": [
+        "/anvil/scratch/x-liu2302/unit1_demo/data/cellranger/Control-CAF/SC_RNA_COUNTER_CS/SC_MULTI_CORE/MULTI_REPORTER/CLOUPE_PREPROCESS/fork0/chnk0-u6a73c7ef26/files/gem_group_index_json.json",
+        "/anvil/scratch/x-liu2302/unit1_demo/data/cellranger/Control-CAF/SC_RNA_COUNTER_CS/SC_MULTI_CORE/MULTI_REPORTER/CLOUPE_PREPROCESS/fork0/chnk0-u6a73c7ef26/files/output_for_cloupe.cloupe",
+        "/anvil/scratch/x-liu2302/unit1_demo/data/cellranger/Control-CAF/SC_RNA_COUNTER_CS/SC_MULTI_CORE/MULTI_REPORTER/CLOUPE_PREPROCESS/fork0/join-u6a73c7ef24/files/output_for_cloupe.cloupe"
+    ],
+    "errors": null,
+    "events": [
+        {
+            "Timestamp": "2025-03-05T01:28:52-05:00",
+            "DeltaBytes": 7419
+        },
+        {
+            "Timestamp": "2025-03-05T01:28:54-05:00",
+            "DeltaBytes": 40946997
+        },
+        {
+            "Timestamp": "2025-03-05T01:29:06-05:00",
+            "DeltaBytes": 40936321
+        },
+        {
+            "Timestamp": "2025-03-05T01:29:07.659141424-05:00",
+            "DeltaBytes": -81856264
+        }
+    ]
+}

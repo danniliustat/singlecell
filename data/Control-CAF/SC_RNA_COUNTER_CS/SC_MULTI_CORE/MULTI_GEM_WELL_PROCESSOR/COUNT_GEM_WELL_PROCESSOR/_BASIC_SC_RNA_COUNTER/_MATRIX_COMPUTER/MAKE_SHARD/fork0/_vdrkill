@@ -1,0 +1,55 @@
+{
+    "count": 13,
+    "size": 16045260372,
+    "timestamp": "2025-03-05 01:28:45",
+    "paths": [
+        "/anvil/scratch/x-liu2302/unit1_demo/data/cellranger/Control-CAF/SC_RNA_COUNTER_CS/SC_MULTI_CORE/MULTI_GEM_WELL_PROCESSOR/COUNT_GEM_WELL_PROCESSOR/_BASIC_SC_RNA_COUNTER/_MATRIX_COMPUTER/MAKE_SHARD/fork0/chnk0-u6a73c7e8f3/files/bc_correct_summary.bcm.bincode",
+        "/anvil/scratch/x-liu2302/unit1_demo/data/cellranger/Control-CAF/SC_RNA_COUNTER_CS/SC_MULTI_CORE/MULTI_GEM_WELL_PROCESSOR/COUNT_GEM_WELL_PROCESSOR/_BASIC_SC_RNA_COUNTER/_MATRIX_COMPUTER/MAKE_SHARD/fork0/chnk0-u6a73c7e8f3/files/chunk_hist.msh.bincode",
+        "/anvil/scratch/x-liu2302/unit1_demo/data/cellranger/Control-CAF/SC_RNA_COUNTER_CS/SC_MULTI_CORE/MULTI_GEM_WELL_PROCESSOR/COUNT_GEM_WELL_PROCESSOR/_BASIC_SC_RNA_COUNTER/_MATRIX_COMPUTER/MAKE_SHARD/fork0/chnk0-u6a73c7e8f3/files/chunk_summary.msm.bincode",
+        "/anvil/scratch/x-liu2302/unit1_demo/data/cellranger/Control-CAF/SC_RNA_COUNTER_CS/SC_MULTI_CORE/MULTI_GEM_WELL_PROCESSOR/COUNT_GEM_WELL_PROCESSOR/_BASIC_SC_RNA_COUNTER/_MATRIX_COMPUTER/MAKE_SHARD/fork0/chnk0-u6a73c7e8f3/files/feature_counts.fbc.bincode",
+        "/anvil/scratch/x-liu2302/unit1_demo/data/cellranger/Control-CAF/SC_RNA_COUNTER_CS/SC_MULTI_CORE/MULTI_GEM_WELL_PROCESSOR/COUNT_GEM_WELL_PROCESSOR/_BASIC_SC_RNA_COUNTER/_MATRIX_COMPUTER/MAKE_SHARD/fork0/join-u6a73c7e8ed/files/sequencing_metrics.smf.json",
+        "/anvil/scratch/x-liu2302/unit1_demo/data/cellranger/Control-CAF/SC_RNA_COUNTER_CS/SC_MULTI_CORE/MULTI_GEM_WELL_PROCESSOR/COUNT_GEM_WELL_PROCESSOR/_BASIC_SC_RNA_COUNTER/_MATRIX_COMPUTER/MAKE_SHARD/fork0/chnk0-u6a73c7e8f3/files/invalid.shard",
+        "/anvil/scratch/x-liu2302/unit1_demo/data/cellranger/Control-CAF/SC_RNA_COUNTER_CS/SC_MULTI_CORE/MULTI_GEM_WELL_PROCESSOR/COUNT_GEM_WELL_PROCESSOR/_BASIC_SC_RNA_COUNTER/_MATRIX_COMPUTER/MAKE_SHARD/fork0/join-u6a73c7e8ed/files/barcode_counts.bcc.bincode",
+        "/anvil/scratch/x-liu2302/unit1_demo/data/cellranger/Control-CAF/SC_RNA_COUNTER_CS/SC_MULTI_CORE/MULTI_GEM_WELL_PROCESSOR/COUNT_GEM_WELL_PROCESSOR/_BASIC_SC_RNA_COUNTER/_MATRIX_COMPUTER/MAKE_SHARD/fork0/join-u6a73c7e8ed/files/barcode_segment_counts.bsc.bincode",
+        "/anvil/scratch/x-liu2302/unit1_demo/data/cellranger/Control-CAF/SC_RNA_COUNTER_CS/SC_MULTI_CORE/MULTI_GEM_WELL_PROCESSOR/COUNT_GEM_WELL_PROCESSOR/_BASIC_SC_RNA_COUNTER/_MATRIX_COMPUTER/MAKE_SHARD/fork0/join-u6a73c7e8ed/files/bc_correct_summary.bcm.bincode",
+        "/anvil/scratch/x-liu2302/unit1_demo/data/cellranger/Control-CAF/SC_RNA_COUNTER_CS/SC_MULTI_CORE/MULTI_GEM_WELL_PROCESSOR/COUNT_GEM_WELL_PROCESSOR/_BASIC_SC_RNA_COUNTER/_MATRIX_COMPUTER/MAKE_SHARD/fork0/chnk0-u6a73c7e8f3/files/valid.shard",
+        "/anvil/scratch/x-liu2302/unit1_demo/data/cellranger/Control-CAF/SC_RNA_COUNTER_CS/SC_MULTI_CORE/MULTI_GEM_WELL_PROCESSOR/COUNT_GEM_WELL_PROCESSOR/_BASIC_SC_RNA_COUNTER/_MATRIX_COMPUTER/MAKE_SHARD/fork0/join-u6a73c7e8ed/files/feature_counts.fbc.bincode",
+        "/anvil/scratch/x-liu2302/unit1_demo/data/cellranger/Control-CAF/SC_RNA_COUNTER_CS/SC_MULTI_CORE/MULTI_GEM_WELL_PROCESSOR/COUNT_GEM_WELL_PROCESSOR/_BASIC_SC_RNA_COUNTER/_MATRIX_COMPUTER/MAKE_SHARD/fork0/join-u6a73c7e8ed/files/summary.json",
+        "/anvil/scratch/x-liu2302/unit1_demo/data/cellranger/Control-CAF/SC_RNA_COUNTER_CS/SC_MULTI_CORE/MULTI_GEM_WELL_PROCESSOR/COUNT_GEM_WELL_PROCESSOR/_BASIC_SC_RNA_COUNTER/_MATRIX_COMPUTER/MAKE_SHARD/fork0/split-u6a73c7e8ed/files/feature_reference.frf.bincode"
+    ],
+    "errors": null,
+    "events": [
+        {
+            "Timestamp": "2025-03-05T01:02:21-05:00",
+            "DeltaBytes": 5090537
+        },
+        {
+            "Timestamp": "2025-03-05T01:02:27-05:00",
+            "DeltaBytes": 16017663182
+        },
+        {
+            "Timestamp": "2025-03-05T01:08:06-05:00",
+            "DeltaBytes": 22541358
+        },
+        {
+            "Timestamp": "2025-03-05T01:08:06.518982846-05:00",
+            "DeltaBytes": -22525501
+        },
+        {
+            "Timestamp": "2025-03-05T01:08:13.201402308-05:00",
+            "DeltaBytes": -592500301
+        },
+        {
+            "Timestamp": "2025-03-05T01:24:37.33756447-05:00",
+            "DeltaBytes": -15425151534
+        },
+        {
+            "Timestamp": "2025-03-05T01:24:41.155154505-05:00",
+            "DeltaBytes": -1735
+        },
+        {
+            "Timestamp": "2025-03-05T01:28:45.982592061-05:00",
+            "DeltaBytes": -5081301
+        }
+    ]
+}

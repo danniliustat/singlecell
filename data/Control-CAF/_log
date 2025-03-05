@@ -1,0 +1,741 @@
+Martian Runtime - v4.0.6
+2025-03-05 01:01:29 [build  ] Built with Go version go1.16.5
+2025-03-05 01:01:29 [cmdline] mrp __Control-CAF.mro Control-CAF --jobmode local
+2025-03-05 01:01:29 [pid    ] 2386547
+2025-03-05 01:01:29 [environ] BASH_ENV=/home/x-liu2302/.bashrc
+2025-03-05 01:01:29 [environ] BASH_FUNC_cellranger%%=() {  /usr/bin/singularity run /apps/biocontainers/images/cumulusprod_cellranger:6.1.1.sif cellranger "$@"
+}
+2025-03-05 01:01:29 [environ] BASH_FUNC_clean_up%%=() {  echo "Cleaning up...";
+ [[ -e "/home/x-liu2302/ondemand/data/sys/dashboard/batch_connect/sys/jupyter/output/2f7424d6-7393-4af9-9281-61d42fc16915/clean.sh" ]] && source "/home/x-liu2302/ondemand/data/sys/dashboard/batch_connect/sys/jupyter/output/2f7424d6-7393-4af9-9281-61d42fc16915/clean.sh";
+ [[ -n ${SCRIPT_PID} ]] && pkill -P ${SCRIPT_PID} || :;
+ pkill -P $$;
+ exit ${1:-0}
+}
+2025-03-05 01:01:29 [environ] BASH_FUNC_clearMT%%=() {  eval $($LMOD_DIR/clearMT_cmd bash)
+}
+2025-03-05 01:01:29 [environ] BASH_FUNC_create_passwd%%=() {  tr -cd 'a-zA-Z0-9' < /dev/urandom 2> /dev/null | head -c${1:-8}
+}
+2025-03-05 01:01:29 [environ] BASH_FUNC_create_yml%%=() {  echo "Generating connection YAML file...";
+ ( umask 077;
+ echo -e "host: $host\nport: $port\npassword: $password" > "/home/x-liu2302/ondemand/data/sys/dashboard/batch_connect/sys/jupyter/output/2f7424d6-7393-4af9-9281-61d42fc16915/connection.yml" )
+}
+2025-03-05 01:01:29 [environ] BASH_FUNC_display%%=() {  display_id="$1";
+ shift;
+ TMPFILE=$(mktemp ${TMPDIR-/tmp}/bash_kernel.XXXXXXXXXX);
+ cat > $TMPFILE;
+ prefix="bash_kernel: saved image data to: ";
+ if [[ "${display_id}" != "" ]]; then
+ echo "${prefix}(${display_id}) $TMPFILE" 1>&2;
+ else
+ echo "${prefix}$TMPFILE" 1>&2;
+ fi
+}
+2025-03-05 01:01:29 [environ] BASH_FUNC_displayHTML%%=() {  display_id="$1";
+ shift;
+ TMPFILE=$(mktemp ${TMPDIR-/tmp}/bash_kernel.XXXXXXXXXX);
+ cat > $TMPFILE;
+ prefix="bash_kernel: saved html data to: ";
+ if [[ "${display_id}" != "" ]]; then
+ echo "${prefix}(${display_id}) $TMPFILE" 1>&2;
+ else
+ echo "${prefix}$TMPFILE" 1>&2;
+ fi
+}
+2025-03-05 01:01:29 [environ] BASH_FUNC_displayJS%%=() {  display_id="$1";
+ shift;
+ TMPFILE=$(mktemp ${TMPDIR-/tmp}/bash_kernel.XXXXXXXXXX);
+ cat > $TMPFILE;
+ prefix="bash_kernel: saved javascript data to: ";
+ if [[ "${display_id}" != "" ]]; then
+ echo "${prefix}(${display_id}) $TMPFILE" 1>&2;
+ else
+ echo "${prefix}$TMPFILE" 1>&2;
+ fi
+}
+2025-03-05 01:01:29 [environ] BASH_FUNC_find_port%%=() {  local host="${1:-localhost}";
+ local port=$(random_number "${2:-2000}" "${3:-65535}");
+ while port_used "${host}:${port}"; do
+ port=$(random_number "${2:-2000}" "${3:-65535}");
+ done;
+ echo "${port}"
+}
+2025-03-05 01:01:29 [environ] BASH_FUNC_gawklibpath_append%%=() {  [ -z "$AWKLIBPATH" ] && AWKLIBPATH=`gawk 'BEGIN {print ENVIRON["AWKLIBPATH"]}'`;
+ export AWKLIBPATH="$AWKLIBPATH:$*"
+}
+2025-03-05 01:01:29 [environ] BASH_FUNC_gawklibpath_default%%=() {  unset AWKLIBPATH;
+ export AWKLIBPATH=`gawk 'BEGIN {print ENVIRON["AWKLIBPATH"]}'`
+}
+2025-03-05 01:01:29 [environ] BASH_FUNC_gawklibpath_prepend%%=() {  [ -z "$AWKLIBPATH" ] && AWKLIBPATH=`gawk 'BEGIN {print ENVIRON["AWKLIBPATH"]}'`;
+ export AWKLIBPATH="$*:$AWKLIBPATH"
+}
+2025-03-05 01:01:29 [environ] BASH_FUNC_gawkpath_append%%=() {  [ -z "$AWKPATH" ] && AWKPATH=`gawk 'BEGIN {print ENVIRON["AWKPATH"]}'`;
+ export AWKPATH="$AWKPATH:$*"
+}
+2025-03-05 01:01:29 [environ] BASH_FUNC_gawkpath_default%%=() {  unset AWKPATH;
+ export AWKPATH=`gawk 'BEGIN {print ENVIRON["AWKPATH"]}'`
+}
+2025-03-05 01:01:29 [environ] BASH_FUNC_gawkpath_prepend%%=() {  [ -z "$AWKPATH" ] && AWKPATH=`gawk 'BEGIN {print ENVIRON["AWKPATH"]}'`;
+ export AWKPATH="$*:$AWKPATH"
+}
+2025-03-05 01:01:29 [environ] BASH_FUNC_ml%%=() {  eval $($LMOD_DIR/ml_cmd "$@")
+}
+2025-03-05 01:01:29 [environ] BASH_FUNC_module%%=() {  eval `$LMOD_CMD sh "$@"`
+}
+2025-03-05 01:01:29 [environ] BASH_FUNC_port_used%%=() {  local port="${1#*:}";
+ local host=$((expr "${1}" : '\(.*\):' || echo "localhost") | awk 'END{print $NF}');
+ local port_strategies=(port_used_nc port_used_lsof port_used_bash port_used_python port_used_python3);
+ for strategy in ${port_strategies[@]};
+ do
+ $strategy $host $port;
+ status=$?;
+ if [[ "$status" == "0" ]] || [[ "$status" == "1" ]]; then
+ return $status;
+ fi;
+ done;
+ return 127
+}
+2025-03-05 01:01:29 [environ] BASH_FUNC_port_used_bash%%=() {  local bash_supported=$(strings /bin/bash 2>/dev/null | grep tcp);
+ if [ "$bash_supported" == "/dev/tcp/*/*" ]; then
+ ( : < /dev/tcp/$1/$2 ) > /dev/null 2>&1;
+ else
+ return 127;
+ fi
+}
+2025-03-05 01:01:29 [environ] BASH_FUNC_port_used_lsof%%=() {  lsof -i :"$2" > /dev/null 2>&1
+}
+2025-03-05 01:01:29 [environ] BASH_FUNC_port_used_nc%%=() {  nc -w 2 "$1" "$2" < /dev/null > /dev/null 2>&1
+}
+2025-03-05 01:01:29 [environ] BASH_FUNC_port_used_python%%=() {  python -c "import socket; socket.socket().connect(('$1',$2))" > /dev/null 2>&1
+}
+2025-03-05 01:01:29 [environ] BASH_FUNC_port_used_python3%%=() {  python3 -c "import socket; socket.socket().connect(('$1',$2))" > /dev/null 2>&1
+}
+2025-03-05 01:01:29 [environ] BASH_FUNC_random_number%%=() {  shuf -i ${1}-${2} -n 1
+}
+2025-03-05 01:01:29 [environ] BASH_FUNC_source_helpers%%=() {  function random_number () 
+ { 
+ shuf -i ${1}-${2} -n 1
+ };
+ export -f random_number;
+ function port_used_python () 
+ { 
+ python -c "import socket; socket.socket().connect(('$1',$2))" > /dev/null 2>&1
+ };
+ function port_used_python3 () 
+ { 
+ python3 -c "import socket; socket.socket().connect(('$1',$2))" > /dev/null 2>&1
+ };
+ function port_used_nc () 
+ { 
+ nc -w 2 "$1" "$2" < /dev/null > /dev/null 2>&1
+ };
+ function port_used_lsof () 
+ { 
+ lsof -i :"$2" > /dev/null 2>&1
+ };
+ function port_used_bash () 
+ { 
+ local bash_supported=$(strings /bin/bash 2>/dev/null | grep tcp);
+ if [ "$bash_supported" == "/dev/tcp/*/*" ]; then
+ ( : < /dev/tcp/$1/$2 ) > /dev/null 2>&1;
+ else
+ return 127;
+ fi
+ };
+ function port_used () 
+ { 
+ local port="${1#*:}";
+ local host=$((expr "${1}" : '\(.*\):' || echo "localhost") | awk 'END{print $NF}');
+ local port_strategies=(port_used_nc port_used_lsof port_used_bash port_used_python port_used_python3);
+ for strategy in ${port_strategies[@]};
+ do
+ $strategy $host $port;
+ status=$?;
+ if [[ "$status" == "0" ]] || [[ "$status" == "1" ]]; then
+ return $status;
+ fi;
+ done;
+ return 127
+ };
+ export -f port_used;
+ function find_port () 
+ { 
+ local host="${1:-localhost}";
+ local port=$(random_number "${2:-2000}" "${3:-65535}");
+ while port_used "${host}:${port}"; do
+ port=$(random_number "${2:-2000}" "${3:-65535}");
+ done;
+ echo "${port}"
+ };
+ export -f find_port;
+ function wait_until_port_used () 
+ { 
+ local port="${1}";
+ local time="${2:-30}";
+ for ((i=1; i<=time*2; i++))
+ do
+ port_used "${port}";
+ port_status=$?;
+ if [ "$port_status" == "0" ]; then
+ return 0;
+ else
+ if [ "$port_status" == "127" ]; then
+ echo "commands to find port were either not found or inaccessible.";
+ echo "command options are lsof, nc, bash's /dev/tcp, or python (or python3) with socket lib.";
+ return 127;
+ fi;
+ fi;
+ sleep 0.5;
+ done;
+ return 1
+ };
+ export -f wait_until_port_used;
+ function create_passwd () 
+ { 
+ tr -cd 'a-zA-Z0-9' < /dev/urandom 2> /dev/null | head -c${1:-8}
+ };
+ export -f create_passwd
+}
+2025-03-05 01:01:29 [environ] BASH_FUNC_wait_until_port_used%%=() {  local port="${1}";
+ local time="${2:-30}";
+ for ((i=1; i<=time*2; i++))
+ do
+ port_used "${port}";
+ port_status=$?;
+ if [ "$port_status" == "0" ]; then
+ return 0;
+ else
+ if [ "$port_status" == "127" ]; then
+ echo "commands to find port were either not found or inaccessible.";
+ echo "command options are lsof, nc, bash's /dev/tcp, or python (or python3) with socket lib.";
+ return 127;
+ fi;
+ fi;
+ sleep 0.5;
+ done;
+ return 1
+}
+2025-03-05 01:01:29 [environ] BASH_FUNC_which%%=() {  ( alias;
+ eval ${which_declare} ) | /usr/bin/which --tty-only --read-alias --read-functions --show-tilde --show-dot $@
+}
+2025-03-05 01:01:29 [environ] ENVIRONMENT=BATCH
+2025-03-05 01:01:29 [environ] HOME=/home/x-liu2302
+2025-03-05 01:01:29 [environ] HOSTNAME=a204
+2025-03-05 01:01:29 [environ] JAVA_HOME=/apps/spack/anvil/apps/openjdk/1.8.0_265-b01-gcc-11.2.0-qlnqjm2
+2025-03-05 01:01:29 [environ] LANG=C
+2025-03-05 01:01:29 [environ] LIBRARY_PATH=/apps/spack/anvil/apps/curl/7.76.1-gcc-8.4.1-6pse5cc/lib:/apps/spack/anvil/apps/gsl/2.4-gcc-8.4.1-exxsoc2/lib:/apps/spack/anvil/apps/krb5/1.18.2-gcc-11.2.0-nfupje5/lib:/apps/anvil/external/apps/rstudio/rstudio-2021.09.0/lib64:/apps/anvil/external/apps/rstudio/rstudio-2021.09.0/lib:/apps/spack/anvil/apps/tk/8.6.11-gcc-11.2.0-fowfs65/lib:/apps/spack/anvil/apps/tcl/8.6.11-gcc-11.2.0-cvxmngv/lib:/apps/spack/anvil/apps/openjdk/1.8.0_265-b01-gcc-11.2.0-qlnqjm2/lib:/apps/spack/anvil/apps/libtiff/4.1.0-gcc-11.2.0-7275hyy/lib:/apps/spack/anvil/apps/libiconv/1.16-gcc-11.2.0-nrbprxy/lib:/apps/spack/anvil/apps/texlive/20200406-gcc-11.2.0-eeavxnm/lib:/apps/spack/anvil/apps/zlib/1.2.11-gcc-11.2.0-g2guo73/lib:/apps/spack/anvil/apps/mpfr/4.0.2-gcc-11.2.0-ke4ellj/lib:/apps/spack/anvil/apps/gmp/6.2.1-gcc-11.2.0-trpptvt/lib:/apps/spack/anvil/apps/gcc/11.2.0-gcc-8.4.1-qjtdkvs/lib64:/apps/spack/anvil/apps/gcc/11.2.0-gcc-8.4.1-qjtdkvs/lib:/apps/spack/anvil/apps/mpc/1.1.0-gcc-8.4.1-dh4xij5/lib
+2025-03-05 01:01:29 [environ] LOGNAME=x-liu2302
+2025-03-05 01:01:29 [environ] MRO_DISK_SPACE_CHECK=disable
+2025-03-05 01:01:29 [environ] PATH=/software/cellranger-6.1.1/lib/bin:/software/cellranger-6.1.1/external/martian/bin:/software/cellranger-6.1.1/external/anaconda/bin:/software/cellranger-6.1.1/bin/tenkit:/software/cellranger-6.1.1/bin:/software:/software/cellranger-6.1.1:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+2025-03-05 01:01:29 [environ] PWD=/anvil/scratch/x-liu2302/unit1_demo/data/cellranger
+2025-03-05 01:01:29 [environ] SBATCH_IGNORE_PBS=yes
+2025-03-05 01:01:29 [environ] SHELL=/bin/bash
+2025-03-05 01:01:29 [environ] SHLVL=4
+2025-03-05 01:01:29 [environ] SLURM_CLUSTER_NAME=anvil
+2025-03-05 01:01:29 [environ] SLURM_CONF=/var/spool/slurm/conf-cache/slurm.conf
+2025-03-05 01:01:29 [environ] SLURM_CPUS_ON_NODE=20
+2025-03-05 01:01:29 [environ] SLURM_EXPORT_ENV=NONE
+2025-03-05 01:01:29 [environ] SLURM_GET_USER_ENV=1
+2025-03-05 01:01:29 [environ] SLURM_GPUS_PER_NODE=0
+2025-03-05 01:01:29 [environ] SLURM_GTIDS=0
+2025-03-05 01:01:29 [environ] SLURM_JOBID=9816841
+2025-03-05 01:01:29 [environ] SLURM_JOB_ACCOUNT=tra220018
+2025-03-05 01:01:29 [environ] SLURM_JOB_CPUS_PER_NODE=20
+2025-03-05 01:01:29 [environ] SLURM_JOB_END_TIME=1741170936
+2025-03-05 01:01:29 [environ] SLURM_JOB_GID=7001326
+2025-03-05 01:01:29 [environ] SLURM_JOB_ID=9816841
+2025-03-05 01:01:29 [environ] SLURM_JOB_NAME=OnDemand/Jupyter
+2025-03-05 01:01:29 [environ] SLURM_JOB_NODELIST=a204
+2025-03-05 01:01:29 [environ] SLURM_JOB_NUM_NODES=1
+2025-03-05 01:01:29 [environ] SLURM_JOB_PARTITION=shared
+2025-03-05 01:01:29 [environ] SLURM_JOB_QOS=cpu
+2025-03-05 01:01:29 [environ] SLURM_JOB_START_TIME=1741152936
+2025-03-05 01:01:29 [environ] SLURM_JOB_UID=7044184
+2025-03-05 01:01:29 [environ] SLURM_JOB_USER=x-liu2302
+2025-03-05 01:01:29 [environ] SLURM_LOCALID=0
+2025-03-05 01:01:29 [environ] SLURM_MEM_PER_CPU=1896
+2025-03-05 01:01:29 [environ] SLURM_NNODES=1
+2025-03-05 01:01:29 [environ] SLURM_NODEID=0
+2025-03-05 01:01:29 [environ] SLURM_NODELIST=a204
+2025-03-05 01:01:29 [environ] SLURM_NPROCS=20
+2025-03-05 01:01:29 [environ] SLURM_NTASKS=20
+2025-03-05 01:01:29 [environ] SLURM_NTASKS_PER_NODE=20
+2025-03-05 01:01:29 [environ] SLURM_PRIO_PROCESS=0
+2025-03-05 01:01:29 [environ] SLURM_PROCID=0
+2025-03-05 01:01:29 [environ] SLURM_SCRIPT_CONTEXT=prolog_task
+2025-03-05 01:01:29 [environ] SLURM_SUBMIT_DIR=/var/www/ood/apps/sys/dashboard
+2025-03-05 01:01:29 [environ] SLURM_SUBMIT_HOST=ondemand.anvil.rcac.purdue.edu
+2025-03-05 01:01:29 [environ] SLURM_TASKS_PER_NODE=20
+2025-03-05 01:01:29 [environ] SLURM_TASK_PID=2382488
+2025-03-05 01:01:29 [environ] SLURM_TOPOLOGY_ADDR=ibsw[23-32].ibsw11.a204
+2025-03-05 01:01:29 [environ] SLURM_TOPOLOGY_ADDR_PATTERN=switch.switch.node
+2025-03-05 01:01:29 [environ] SSH_ASKPASS=/usr/libexec/openssh/gnome-ssh-askpass
+2025-03-05 01:01:29 [environ] TERM=xterm-color
+2025-03-05 01:01:29 [environ] TMPDIR=/tmp
+2025-03-05 01:01:29 [environ] USER=x-liu2302
+2025-03-05 01:01:29 [environ] XDG_DATA_DIRS=/apps/spack/anvil/apps/pango/1.42.0-gcc-11.2.0-igqnkd7/share:/apps/spack/anvil/apps/gobject-introspection/1.56.1-gcc-11.2.0-cr2hto2/share:/apps/spack/anvil/apps/gtkplus/3.24.26-gcc-11.2.0-b7orocd/share:/apps/spack/anvil/apps/shared-mime-info/1.9-gcc-11.2.0-k5zlmh4/share:/apps/spack/anvil/apps/gdk-pixbuf/2.42.2-gcc-11.2.0-k67ssbg/share:/apps/spack/anvil/apps/atk/2.36.0-gcc-11.2.0-kqz5r4q/share
+2025-03-05 01:01:29 [environ] _=/usr/bin/singularity
+2025-03-05 01:01:29 [environ] LC_CTYPE=en_US.UTF-8
+2025-03-05 01:01:29 [environ] PYTHONNOUSERSITE=1
+2025-03-05 01:01:29 [environ] RUST_BACKTRACE=1
+2025-03-05 01:01:29 [environ] PYTHONPATH=/software/cellranger-6.1.1/external/martian/adapters/python:/software/cellranger-6.1.1/lib/python
+2025-03-05 01:01:29 [environ] TENX_PRODUCT=cellranger
+2025-03-05 01:01:29 [environ] TENX_VERSION=cellranger-6.1.1
+2025-03-05 01:01:29 [environ] TENX_COPYRIGHT=Copyright (c) 2021 10x Genomics, Inc.  All rights reserved.
+2025-03-05 01:01:29 [environ] MROPATH=/software/cellranger-6.1.1/mro
+2025-03-05 01:01:29 [version] MRO Version=cellranger-6.1.1
+2025-03-05 01:01:29 [options] --jobmode=local
+2025-03-05 01:01:29 [options] --vdrmode=rolling
+2025-03-05 01:01:29 [options] --profile=disable
+2025-03-05 01:01:29 [options] --stackvars=false
+2025-03-05 01:01:29 [options] --zip=false
+2025-03-05 01:01:29 [options] --limit-loadavg=false
+2025-03-05 01:01:29 [options] --noexit=false
+2025-03-05 01:01:29 [options] --nopreflight=false
+2025-03-05 01:01:29 [jobmngr] Job config = /software/cellranger-6.1.1/external/martian/jobmanagers/config.json
+2025-03-05 01:01:29 [jobmngr] Using 20 logical cores available on system.
+2025-03-05 01:01:29 [jobmngr] Detected cgroup memory limit of 39762001920 bytes.  Using it instead of total system memory 270022422528
+2025-03-05 01:01:29 [jobmngr] Using 35 GB, 96% of system memory.
+2025-03-05 01:01:29 [jobmngr] WARNING: configured to use 35GB of local memory, but only 24.0GB is currently available.
+2025-03-05 01:01:29 [sysinfo] linux amd64
+2025-03-05 01:01:29 [sysinfo] Linux kernel release version: 4.18.0-553.16.1.el8_10.x86_64
+2025-03-05 01:01:29 [sysinfo] glibc version: 2.28
+2025-03-05 01:01:29 [filesys] Pipestance path /anvil/scratch/x-liu2302/unit1_demo/data/cellranger/Control-CAF
+2025-03-05 01:01:29 [filesys] Pipestance filesystem type gpfs
+2025-03-05 01:01:29 [filesys] 6.8 PB and 1,307,451,266,820,997,247 inodes available.
+2025-03-05 01:01:29 [filesys] Pipestance filesystem gpfs mount options: rw,nosuid,nodev,relatime,rw
+2025-03-05 01:01:29 [filesys] Bin path /software/cellranger-6.1.1/external/martian/bin
+2025-03-05 01:01:29 [filesys] Bin filesystem type overlayfs
+2025-03-05 01:01:29 [filesys] Bin filesystem overlay mount options: rw,nodev,relatime,ro,lowerdir=/var/lib/apptainer/mnt/session/overlay-lowerdir:/var/lib/apptainer/mnt/session/rootfs
+Serving UI at http://a204.anvil.rcac.purdue.edu:42285?auth=0U_95By4wTHSoeUKuQAbhVf-kTe9UvHqpKFLw7hMBoM
+
+Running preflight checks (please wait)...
+2025-03-05 01:01:29 [runtime] (ready)           ID.Control-CAF.SC_RNA_COUNTER_CS.CELLRANGER_PREFLIGHT_LOCAL
+2025-03-05 01:01:29 [runtime] (run:local)       ID.Control-CAF.SC_RNA_COUNTER_CS.CELLRANGER_PREFLIGHT_LOCAL.fork0.chnk0.main
+2025-03-05 01:01:29 [runtime] (ready)           ID.Control-CAF.SC_RNA_COUNTER_CS.CELLRANGER_PREFLIGHT
+2025-03-05 01:01:29 [runtime] (run:local)       ID.Control-CAF.SC_RNA_COUNTER_CS.CELLRANGER_PREFLIGHT.fork0.chnk0.main
+2025-03-05 01:01:34 [runtime] (chunks_complete) ID.Control-CAF.SC_RNA_COUNTER_CS.CELLRANGER_PREFLIGHT_LOCAL
+2025-03-05 01:01:34 [runtime] (chunks_complete) ID.Control-CAF.SC_RNA_COUNTER_CS.CELLRANGER_PREFLIGHT
+2025-03-05 01:01:34 [runtime] (ready)           ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.SANITIZE_MAP_CALLS
+2025-03-05 01:01:34 [runtime] (disabled)        ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.SANITIZE_MAP_CALLS
+2025-03-05 01:01:34 [runtime] (ready)           ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.MULTI_GEM_WELL_PROCESSOR.COUNT_GEM_WELL_PROCESSOR._BASIC_SC_RNA_COUNTER.DISABLE_BAMS
+2025-03-05 01:01:34 [runtime] (run:local)       ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.MULTI_GEM_WELL_PROCESSOR.COUNT_GEM_WELL_PROCESSOR._BASIC_SC_RNA_COUNTER.DISABLE_BAMS.fork0.chnk0.main
+2025-03-05 01:01:34 [runtime] (ready)           ID.Control-CAF.SC_RNA_COUNTER_CS.WRITE_GENE_INDEX
+2025-03-05 01:01:34 [runtime] (run:local)       ID.Control-CAF.SC_RNA_COUNTER_CS.WRITE_GENE_INDEX.fork0.chnk0.main
+2025-03-05 01:01:34 [runtime] (ready)           ID.Control-CAF.SC_RNA_COUNTER_CS.FULL_COUNT_INPUTS.WRITE_GENE_INDEX
+2025-03-05 01:01:34 [runtime] (run:local)       ID.Control-CAF.SC_RNA_COUNTER_CS.FULL_COUNT_INPUTS.WRITE_GENE_INDEX.fork0.chnk0.main
+2025-03-05 01:01:34 [runtime] (ready)           ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.MAKE_FULL_CONFIG._MAKE_VDJ_CONFIG
+2025-03-05 01:01:34 [runtime] (run:local)       ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.MAKE_FULL_CONFIG._MAKE_VDJ_CONFIG.fork0.chnk0.main
+2025-03-05 01:01:34 [runtime] (ready)           ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.MULTI_CHEMISTRY_DETECTOR._GEM_WELL_CHEMISTRY_DETECTOR.DETECT_COUNT_CHEMISTRY
+2025-03-05 01:01:34 [runtime] (run:local)       ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.MULTI_CHEMISTRY_DETECTOR._GEM_WELL_CHEMISTRY_DETECTOR.DETECT_COUNT_CHEMISTRY.fork0.chnk0.main
+2025-03-05 01:01:34 [runtime] (chunks_complete) ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.MULTI_GEM_WELL_PROCESSOR.COUNT_GEM_WELL_PROCESSOR._BASIC_SC_RNA_COUNTER.DISABLE_BAMS
+2025-03-05 01:01:34 [runtime] (chunks_complete) ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.MAKE_FULL_CONFIG._MAKE_VDJ_CONFIG
+2025-03-05 01:01:34 [runtime] (ready)           ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.MULTI_GEM_WELL_PROCESSOR.VDJ_T_GEM_WELL_PROCESSOR.MULTI_SETUP_CHUNKS
+2025-03-05 01:01:34 [runtime] (disabled)        ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.MULTI_GEM_WELL_PROCESSOR.VDJ_T_GEM_WELL_PROCESSOR.MULTI_SETUP_CHUNKS
+2025-03-05 01:01:34 [runtime] (ready)           ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.MULTI_GEM_WELL_PROCESSOR.VDJ_B_GEM_WELL_PROCESSOR.MULTI_SETUP_CHUNKS
+2025-03-05 01:01:34 [runtime] (disabled)        ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.MULTI_GEM_WELL_PROCESSOR.VDJ_B_GEM_WELL_PROCESSOR.MULTI_SETUP_CHUNKS
+2025-03-05 01:01:34 [runtime] (ready)           ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.MULTI_GEM_WELL_PROCESSOR.VDJ_B_GEM_WELL_PROCESSOR.SC_VDJ_CONTIG_ASSEMBLER.MAKE_SHARD
+2025-03-05 01:01:34 [runtime] (disabled)        ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.MULTI_GEM_WELL_PROCESSOR.VDJ_B_GEM_WELL_PROCESSOR.SC_VDJ_CONTIG_ASSEMBLER.MAKE_SHARD
+2025-03-05 01:01:34 [runtime] (ready)           ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.MULTI_GEM_WELL_PROCESSOR.VDJ_T_GEM_WELL_PROCESSOR.SC_VDJ_CONTIG_ASSEMBLER.MAKE_SHARD
+2025-03-05 01:01:34 [runtime] (disabled)        ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.MULTI_GEM_WELL_PROCESSOR.VDJ_T_GEM_WELL_PROCESSOR.SC_VDJ_CONTIG_ASSEMBLER.MAKE_SHARD
+2025-03-05 01:01:34 [runtime] (ready)           ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.MULTI_GEM_WELL_PROCESSOR.VDJ_B_GEM_WELL_PROCESSOR.SC_VDJ_CONTIG_ASSEMBLER.BARCODE_CORRECTION
+2025-03-05 01:01:34 [runtime] (disabled)        ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.MULTI_GEM_WELL_PROCESSOR.VDJ_B_GEM_WELL_PROCESSOR.SC_VDJ_CONTIG_ASSEMBLER.BARCODE_CORRECTION
+2025-03-05 01:01:34 [runtime] (ready)           ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.MULTI_GEM_WELL_PROCESSOR.VDJ_T_GEM_WELL_PROCESSOR.SC_VDJ_CONTIG_ASSEMBLER.BARCODE_CORRECTION
+2025-03-05 01:01:34 [runtime] (disabled)        ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.MULTI_GEM_WELL_PROCESSOR.VDJ_T_GEM_WELL_PROCESSOR.SC_VDJ_CONTIG_ASSEMBLER.BARCODE_CORRECTION
+2025-03-05 01:01:34 [runtime] (ready)           ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.MULTI_GEM_WELL_PROCESSOR.VDJ_T_GEM_WELL_PROCESSOR.SC_VDJ_CONTIG_ASSEMBLER.RUST_BRIDGE
+2025-03-05 01:01:34 [runtime] (disabled)        ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.MULTI_GEM_WELL_PROCESSOR.VDJ_T_GEM_WELL_PROCESSOR.SC_VDJ_CONTIG_ASSEMBLER.RUST_BRIDGE
+2025-03-05 01:01:34 [runtime] (ready)           ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.MULTI_GEM_WELL_PROCESSOR.VDJ_B_GEM_WELL_PROCESSOR.SC_VDJ_CONTIG_ASSEMBLER.RUST_BRIDGE
+2025-03-05 01:01:34 [runtime] (disabled)        ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.MULTI_GEM_WELL_PROCESSOR.VDJ_B_GEM_WELL_PROCESSOR.SC_VDJ_CONTIG_ASSEMBLER.RUST_BRIDGE
+2025-03-05 01:01:34 [runtime] (ready)           ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.MULTI_GEM_WELL_PROCESSOR.VDJ_T_GEM_WELL_PROCESSOR.SC_VDJ_CONTIG_ASSEMBLER.ASSEMBLE_VDJ
+2025-03-05 01:01:34 [runtime] (disabled)        ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.MULTI_GEM_WELL_PROCESSOR.VDJ_T_GEM_WELL_PROCESSOR.SC_VDJ_CONTIG_ASSEMBLER.ASSEMBLE_VDJ
+2025-03-05 01:01:34 [runtime] (ready)           ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.MULTI_GEM_WELL_PROCESSOR.VDJ_T_GEM_WELL_PROCESSOR.SC_VDJ_CONTIG_ASSEMBLER.MERGE_METRICS
+2025-03-05 01:01:34 [runtime] (disabled)        ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.MULTI_GEM_WELL_PROCESSOR.VDJ_T_GEM_WELL_PROCESSOR.SC_VDJ_CONTIG_ASSEMBLER.MERGE_METRICS
+2025-03-05 01:01:34 [runtime] (ready)           ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.MULTI_GEM_WELL_PROCESSOR.VDJ_B_GEM_WELL_PROCESSOR.SC_VDJ_CONTIG_ASSEMBLER.ASSEMBLE_VDJ
+2025-03-05 01:01:34 [runtime] (disabled)        ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.MULTI_GEM_WELL_PROCESSOR.VDJ_B_GEM_WELL_PROCESSOR.SC_VDJ_CONTIG_ASSEMBLER.ASSEMBLE_VDJ
+2025-03-05 01:01:34 [runtime] (ready)           ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.MULTI_GEM_WELL_PROCESSOR.VDJ_B_GEM_WELL_PROCESSOR.SC_VDJ_CONTIG_ASSEMBLER.MERGE_METRICS
+2025-03-05 01:01:34 [runtime] (disabled)        ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.MULTI_GEM_WELL_PROCESSOR.VDJ_B_GEM_WELL_PROCESSOR.SC_VDJ_CONTIG_ASSEMBLER.MERGE_METRICS
+2025-03-05 01:01:59 [runtime] (chunks_complete) ID.Control-CAF.SC_RNA_COUNTER_CS.FULL_COUNT_INPUTS.WRITE_GENE_INDEX
+2025-03-05 01:01:59 [runtime] (ready)           ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.MULTI_GEM_WELL_PROCESSOR.COUNT_GEM_WELL_PROCESSOR.PARSE_TARGET_FEATURES
+2025-03-05 01:01:59 [runtime] (run:local)       ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.MULTI_GEM_WELL_PROCESSOR.COUNT_GEM_WELL_PROCESSOR.PARSE_TARGET_FEATURES.fork0.chnk0.main
+2025-03-05 01:01:59 [runtime] (chunks_complete) ID.Control-CAF.SC_RNA_COUNTER_CS.WRITE_GENE_INDEX
+2025-03-05 01:02:01 [runtime] (chunks_complete) ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.MULTI_GEM_WELL_PROCESSOR.COUNT_GEM_WELL_PROCESSOR.PARSE_TARGET_FEATURES
+2025-03-05 01:02:20 [runtime] (chunks_complete) ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.MULTI_CHEMISTRY_DETECTOR._GEM_WELL_CHEMISTRY_DETECTOR.DETECT_COUNT_CHEMISTRY
+2025-03-05 01:02:20 [runtime] (disabled)        ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.MULTI_CHEMISTRY_DETECTOR._GEM_WELL_CHEMISTRY_DETECTOR.VDJ_CHEMISTRY_DETECTOR
+2025-03-05 01:02:20 [runtime] (ready)           ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.MULTI_CHEMISTRY_DETECTOR._GEM_WELL_CHEMISTRY_DETECTOR.CHECK_BARCODES_COMPATIBILITY
+2025-03-05 01:02:20 [runtime] (run:local)       ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.MULTI_CHEMISTRY_DETECTOR._GEM_WELL_CHEMISTRY_DETECTOR.CHECK_BARCODES_COMPATIBILITY.fork0.chnk0.main
+2025-03-05 01:02:20 [runtime] (chunks_complete) ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.MULTI_CHEMISTRY_DETECTOR._GEM_WELL_CHEMISTRY_DETECTOR.CHECK_BARCODES_COMPATIBILITY
+2025-03-05 01:02:20 [runtime] (ready)           ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.MULTI_CHEMISTRY_DETECTOR.COMBINE_GEM_WELL_CHEMISTRIES
+2025-03-05 01:02:20 [runtime] (run:local)       ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.MULTI_CHEMISTRY_DETECTOR.COMBINE_GEM_WELL_CHEMISTRIES.fork0.chnk0.main
+2025-03-05 01:02:20 [runtime] (chunks_complete) ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.MULTI_CHEMISTRY_DETECTOR.COMBINE_GEM_WELL_CHEMISTRIES
+2025-03-05 01:02:20 [runtime] (ready)           ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.MULTI_GEM_WELL_PROCESSOR.COUNT_GEM_WELL_PROCESSOR.MULTI_SETUP_CHUNKS
+2025-03-05 01:02:20 [runtime] (run:local)       ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.MULTI_GEM_WELL_PROCESSOR.COUNT_GEM_WELL_PROCESSOR.MULTI_SETUP_CHUNKS.fork0.chnk0.main
+2025-03-05 01:02:20 [runtime] (ready)           ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.SPLIT_VDJ_INPUTS
+2025-03-05 01:02:20 [runtime] (disabled)        ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.SPLIT_VDJ_INPUTS
+2025-03-05 01:02:21 [runtime] (chunks_complete) ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.MULTI_GEM_WELL_PROCESSOR.COUNT_GEM_WELL_PROCESSOR.MULTI_SETUP_CHUNKS
+2025-03-05 01:02:21 [runtime] (ready)           ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.MULTI_GEM_WELL_PROCESSOR.COUNT_GEM_WELL_PROCESSOR._BASIC_SC_RNA_COUNTER._MATRIX_COMPUTER.MAKE_SHARD
+2025-03-05 01:02:21 [runtime] (run:local)       ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.MULTI_GEM_WELL_PROCESSOR.COUNT_GEM_WELL_PROCESSOR._BASIC_SC_RNA_COUNTER._MATRIX_COMPUTER.MAKE_SHARD.fork0.split
+2025-03-05 01:02:27 [runtime] (split_complete)  ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.MULTI_GEM_WELL_PROCESSOR.COUNT_GEM_WELL_PROCESSOR._BASIC_SC_RNA_COUNTER._MATRIX_COMPUTER.MAKE_SHARD
+2025-03-05 01:02:27 [runtime] (run:local)       ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.MULTI_GEM_WELL_PROCESSOR.COUNT_GEM_WELL_PROCESSOR._BASIC_SC_RNA_COUNTER._MATRIX_COMPUTER.MAKE_SHARD.fork0.chnk0.main
+2025-03-05 01:08:06 [runtime] (chunks_complete) ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.MULTI_GEM_WELL_PROCESSOR.COUNT_GEM_WELL_PROCESSOR._BASIC_SC_RNA_COUNTER._MATRIX_COMPUTER.MAKE_SHARD
+2025-03-05 01:08:06 [runtime] (run:local)       ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.MULTI_GEM_WELL_PROCESSOR.COUNT_GEM_WELL_PROCESSOR._BASIC_SC_RNA_COUNTER._MATRIX_COMPUTER.MAKE_SHARD.fork0.join
+2025-03-05 01:08:06 [runtime] (join_complete)   ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.MULTI_GEM_WELL_PROCESSOR.COUNT_GEM_WELL_PROCESSOR._BASIC_SC_RNA_COUNTER._MATRIX_COMPUTER.MAKE_SHARD
+2025-03-05 01:08:06 [runtime] (ready)           ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.MULTI_GEM_WELL_PROCESSOR.COUNT_GEM_WELL_PROCESSOR._BASIC_SC_RNA_COUNTER._MATRIX_COMPUTER.BARCODE_CORRECTION
+2025-03-05 01:08:06 [runtime] (run:local)       ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.MULTI_GEM_WELL_PROCESSOR.COUNT_GEM_WELL_PROCESSOR._BASIC_SC_RNA_COUNTER._MATRIX_COMPUTER.BARCODE_CORRECTION.fork0.split
+2025-03-05 01:08:06 [runtime] (split_complete)  ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.MULTI_GEM_WELL_PROCESSOR.COUNT_GEM_WELL_PROCESSOR._BASIC_SC_RNA_COUNTER._MATRIX_COMPUTER.BARCODE_CORRECTION
+2025-03-05 01:08:06 [runtime] (run:local)       ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.MULTI_GEM_WELL_PROCESSOR.COUNT_GEM_WELL_PROCESSOR._BASIC_SC_RNA_COUNTER._MATRIX_COMPUTER.BARCODE_CORRECTION.fork0.chnk0.main
+2025-03-05 01:08:06 [runtime] (run:local)       ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.MULTI_GEM_WELL_PROCESSOR.COUNT_GEM_WELL_PROCESSOR._BASIC_SC_RNA_COUNTER._MATRIX_COMPUTER.BARCODE_CORRECTION.fork0.chnk1.main
+2025-03-05 01:08:06 [runtime] (run:local)       ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.MULTI_GEM_WELL_PROCESSOR.COUNT_GEM_WELL_PROCESSOR._BASIC_SC_RNA_COUNTER._MATRIX_COMPUTER.BARCODE_CORRECTION.fork0.chnk2.main
+2025-03-05 01:08:13 [runtime] (chunks_complete) ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.MULTI_GEM_WELL_PROCESSOR.COUNT_GEM_WELL_PROCESSOR._BASIC_SC_RNA_COUNTER._MATRIX_COMPUTER.BARCODE_CORRECTION
+2025-03-05 01:08:13 [runtime] (run:local)       ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.MULTI_GEM_WELL_PROCESSOR.COUNT_GEM_WELL_PROCESSOR._BASIC_SC_RNA_COUNTER._MATRIX_COMPUTER.BARCODE_CORRECTION.fork0.join
+2025-03-05 01:08:13 [runtime] (join_complete)   ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.MULTI_GEM_WELL_PROCESSOR.COUNT_GEM_WELL_PROCESSOR._BASIC_SC_RNA_COUNTER._MATRIX_COMPUTER.BARCODE_CORRECTION
+2025-03-05 01:08:13 [runtime] (ready)           ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.MULTI_GEM_WELL_PROCESSOR.COUNT_GEM_WELL_PROCESSOR._BASIC_SC_RNA_COUNTER._MATRIX_COMPUTER.WRITE_BARCODE_INDEX
+2025-03-05 01:08:13 [runtime] (run:local)       ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.MULTI_GEM_WELL_PROCESSOR.COUNT_GEM_WELL_PROCESSOR._BASIC_SC_RNA_COUNTER._MATRIX_COMPUTER.WRITE_BARCODE_INDEX.fork0.chnk0.main
+2025-03-05 01:08:13 [runtime] (ready)           ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.MULTI_GEM_WELL_PROCESSOR.COUNT_GEM_WELL_PROCESSOR._BASIC_SC_RNA_COUNTER._MATRIX_COMPUTER._SLFE_PARTIAL_FIRST_PASS.SUBSAMPLE_BARCODES
+2025-03-05 01:08:13 [runtime] (disabled)        ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.MULTI_GEM_WELL_PROCESSOR.COUNT_GEM_WELL_PROCESSOR._BASIC_SC_RNA_COUNTER._MATRIX_COMPUTER._SLFE_PARTIAL_FIRST_PASS.SUBSAMPLE_BARCODES
+2025-03-05 01:08:13 [runtime] (ready)           ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.MULTI_GEM_WELL_PROCESSOR.COUNT_GEM_WELL_PROCESSOR._BASIC_SC_RNA_COUNTER._MATRIX_COMPUTER.SET_ALIGNER_SUBSAMPLE_RATE
+2025-03-05 01:08:13 [runtime] (run:local)       ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.MULTI_GEM_WELL_PROCESSOR.COUNT_GEM_WELL_PROCESSOR._BASIC_SC_RNA_COUNTER._MATRIX_COMPUTER.SET_ALIGNER_SUBSAMPLE_RATE.fork0.chnk0.main
+2025-03-05 01:08:13 [runtime] (ready)           ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.MULTI_GEM_WELL_PROCESSOR.COUNT_GEM_WELL_PROCESSOR._BASIC_SC_RNA_COUNTER._MATRIX_COMPUTER._SLFE_PARTIAL_FIRST_PASS.INITIAL_ALIGN_AND_COUNT
+2025-03-05 01:08:13 [runtime] (disabled)        ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.MULTI_GEM_WELL_PROCESSOR.COUNT_GEM_WELL_PROCESSOR._BASIC_SC_RNA_COUNTER._MATRIX_COMPUTER._SLFE_PARTIAL_FIRST_PASS.INITIAL_ALIGN_AND_COUNT
+2025-03-05 01:08:13 [runtime] (chunks_complete) ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.MULTI_GEM_WELL_PROCESSOR.COUNT_GEM_WELL_PROCESSOR._BASIC_SC_RNA_COUNTER._MATRIX_COMPUTER.SET_ALIGNER_SUBSAMPLE_RATE
+2025-03-05 01:08:13 [runtime] (ready)           ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.MULTI_GEM_WELL_PROCESSOR.COUNT_GEM_WELL_PROCESSOR._BASIC_SC_RNA_COUNTER._MATRIX_COMPUTER._SLFE_PARTIAL_FIRST_PASS.SET_TARGETED_UMI_FILTER
+2025-03-05 01:08:13 [runtime] (disabled)        ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.MULTI_GEM_WELL_PROCESSOR.COUNT_GEM_WELL_PROCESSOR._BASIC_SC_RNA_COUNTER._MATRIX_COMPUTER._SLFE_PARTIAL_FIRST_PASS.SET_TARGETED_UMI_FILTER
+2025-03-05 01:08:13 [runtime] (disabled)        ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.MULTI_GEM_WELL_PROCESSOR.COUNT_GEM_WELL_PROCESSOR._BASIC_SC_RNA_COUNTER._MATRIX_COMPUTER._SLFE_PARTIAL_FIRST_PASS
+2025-03-05 01:08:13 [runtime] (ready)           ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.MULTI_GEM_WELL_PROCESSOR.COUNT_GEM_WELL_PROCESSOR._BASIC_SC_RNA_COUNTER._MATRIX_COMPUTER.ALIGN_AND_COUNT
+2025-03-05 01:08:13 [runtime] (run:local)       ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.MULTI_GEM_WELL_PROCESSOR.COUNT_GEM_WELL_PROCESSOR._BASIC_SC_RNA_COUNTER._MATRIX_COMPUTER.ALIGN_AND_COUNT.fork0.split
+2025-03-05 01:08:13 [runtime] (split_complete)  ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.MULTI_GEM_WELL_PROCESSOR.COUNT_GEM_WELL_PROCESSOR._BASIC_SC_RNA_COUNTER._MATRIX_COMPUTER.ALIGN_AND_COUNT
+2025-03-05 01:08:13 [runtime] (run:local)       ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.MULTI_GEM_WELL_PROCESSOR.COUNT_GEM_WELL_PROCESSOR._BASIC_SC_RNA_COUNTER._MATRIX_COMPUTER.ALIGN_AND_COUNT.fork0.chnk0.main
+2025-03-05 01:08:13 [runtime] (run:local)       ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.MULTI_GEM_WELL_PROCESSOR.COUNT_GEM_WELL_PROCESSOR._BASIC_SC_RNA_COUNTER._MATRIX_COMPUTER.ALIGN_AND_COUNT.fork0.chnk1.main
+2025-03-05 01:08:13 [jobmngr] Need 17 GB of memory to start the next job (14 GB of memory available).  Waiting for jobs to complete.
+2025-03-05 01:08:13 [runtime] (run:local)       ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.MULTI_GEM_WELL_PROCESSOR.COUNT_GEM_WELL_PROCESSOR._BASIC_SC_RNA_COUNTER._MATRIX_COMPUTER.ALIGN_AND_COUNT.fork0.chnk2.main
+2025-03-05 01:08:13 [jobmngr] Need 17 GB of memory to start the next job (1 GB of memory available). Waiting for jobs to complete.
+2025-03-05 01:08:13 [runtime] (chunks_complete) ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.MULTI_GEM_WELL_PROCESSOR.COUNT_GEM_WELL_PROCESSOR._BASIC_SC_RNA_COUNTER._MATRIX_COMPUTER.WRITE_BARCODE_INDEX
+2025-03-05 01:14:15 [runtime] (update)          ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.MULTI_GEM_WELL_PROCESSOR.COUNT_GEM_WELL_PROCESSOR._BASIC_SC_RNA_COUNTER._MATRIX_COMPUTER.ALIGN_AND_COUNT.fork0 chunks running (0/3 completed)
+2025-03-05 01:20:29 [runtime] (update)          ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.MULTI_GEM_WELL_PROCESSOR.COUNT_GEM_WELL_PROCESSOR._BASIC_SC_RNA_COUNTER._MATRIX_COMPUTER.ALIGN_AND_COUNT.fork0 chunks running (2/3 completed)
+2025-03-05 01:24:37 [runtime] (chunks_complete) ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.MULTI_GEM_WELL_PROCESSOR.COUNT_GEM_WELL_PROCESSOR._BASIC_SC_RNA_COUNTER._MATRIX_COMPUTER.ALIGN_AND_COUNT
+2025-03-05 01:24:37 [runtime] (run:local)       ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.MULTI_GEM_WELL_PROCESSOR.COUNT_GEM_WELL_PROCESSOR._BASIC_SC_RNA_COUNTER._MATRIX_COMPUTER.ALIGN_AND_COUNT.fork0.join
+2025-03-05 01:24:37 [runtime] (join_complete)   ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.MULTI_GEM_WELL_PROCESSOR.COUNT_GEM_WELL_PROCESSOR._BASIC_SC_RNA_COUNTER._MATRIX_COMPUTER.ALIGN_AND_COUNT
+2025-03-05 01:24:37 [runtime] (ready)           ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.MULTI_GEM_WELL_PROCESSOR.COUNT_GEM_WELL_PROCESSOR._BASIC_SC_RNA_COUNTER.WRITE_POS_BAM
+2025-03-05 01:24:37 [runtime] (run:local)       ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.MULTI_GEM_WELL_PROCESSOR.COUNT_GEM_WELL_PROCESSOR._BASIC_SC_RNA_COUNTER.WRITE_POS_BAM.fork0.split
+2025-03-05 01:24:37 [runtime] (ready)           ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.MULTI_GEM_WELL_PROCESSOR.COUNT_GEM_WELL_PROCESSOR._BASIC_SC_RNA_COUNTER._MATRIX_COMPUTER.COLLATE_METRICS
+2025-03-05 01:24:37 [runtime] (run:local)       ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.MULTI_GEM_WELL_PROCESSOR.COUNT_GEM_WELL_PROCESSOR._BASIC_SC_RNA_COUNTER._MATRIX_COMPUTER.COLLATE_METRICS.fork0.split
+2025-03-05 01:24:37 [runtime] (ready)           ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.MULTI_GEM_WELL_PROCESSOR.COUNT_GEM_WELL_PROCESSOR._BASIC_SC_RNA_COUNTER._MATRIX_COMPUTER.WRITE_H5_MATRIX
+2025-03-05 01:24:37 [runtime] (run:local)       ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.MULTI_GEM_WELL_PROCESSOR.COUNT_GEM_WELL_PROCESSOR._BASIC_SC_RNA_COUNTER._MATRIX_COMPUTER.WRITE_H5_MATRIX.fork0.chnk0.main
+2025-03-05 01:24:37 [runtime] (ready)           ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.MULTI_GEM_WELL_PROCESSOR.COUNT_GEM_WELL_PROCESSOR._BASIC_SC_RNA_COUNTER._MATRIX_COMPUTER.WRITE_MATRIX_MARKET
+2025-03-05 01:24:37 [runtime] (run:local)       ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.MULTI_GEM_WELL_PROCESSOR.COUNT_GEM_WELL_PROCESSOR._BASIC_SC_RNA_COUNTER._MATRIX_COMPUTER.WRITE_MATRIX_MARKET.fork0.chnk0.main
+2025-03-05 01:24:37 [runtime] (ready)           ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.MULTI_GEM_WELL_PROCESSOR.COUNT_GEM_WELL_PROCESSOR._BASIC_SC_RNA_COUNTER._MATRIX_COMPUTER.WRITE_BARCODE_SUMMARY
+2025-03-05 01:24:37 [runtime] (run:local)       ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.MULTI_GEM_WELL_PROCESSOR.COUNT_GEM_WELL_PROCESSOR._BASIC_SC_RNA_COUNTER._MATRIX_COMPUTER.WRITE_BARCODE_SUMMARY.fork0.chnk0.main
+2025-03-05 01:24:37 [runtime] (split_complete)  ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.MULTI_GEM_WELL_PROCESSOR.COUNT_GEM_WELL_PROCESSOR._BASIC_SC_RNA_COUNTER._MATRIX_COMPUTER.COLLATE_METRICS
+2025-03-05 01:24:37 [runtime] (run:local)       ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.MULTI_GEM_WELL_PROCESSOR.COUNT_GEM_WELL_PROCESSOR._BASIC_SC_RNA_COUNTER._MATRIX_COMPUTER.COLLATE_METRICS.fork0.chnk0.main
+2025-03-05 01:24:38 [runtime] (split_complete)  ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.MULTI_GEM_WELL_PROCESSOR.COUNT_GEM_WELL_PROCESSOR._BASIC_SC_RNA_COUNTER.WRITE_POS_BAM
+2025-03-05 01:24:38 [runtime] (run:local)       ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.MULTI_GEM_WELL_PROCESSOR.COUNT_GEM_WELL_PROCESSOR._BASIC_SC_RNA_COUNTER.WRITE_POS_BAM.fork0.chnk0.main
+2025-03-05 01:24:38 [runtime] (run:local)       ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.MULTI_GEM_WELL_PROCESSOR.COUNT_GEM_WELL_PROCESSOR._BASIC_SC_RNA_COUNTER.WRITE_POS_BAM.fork0.chnk1.main
+2025-03-05 01:24:38 [runtime] (run:local)       ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.MULTI_GEM_WELL_PROCESSOR.COUNT_GEM_WELL_PROCESSOR._BASIC_SC_RNA_COUNTER.WRITE_POS_BAM.fork0.chnk2.main
+2025-03-05 01:24:41 [runtime] (chunks_complete) ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.MULTI_GEM_WELL_PROCESSOR.COUNT_GEM_WELL_PROCESSOR._BASIC_SC_RNA_COUNTER._MATRIX_COMPUTER.COLLATE_METRICS
+2025-03-05 01:24:41 [runtime] (run:local)       ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.MULTI_GEM_WELL_PROCESSOR.COUNT_GEM_WELL_PROCESSOR._BASIC_SC_RNA_COUNTER._MATRIX_COMPUTER.COLLATE_METRICS.fork0.join
+2025-03-05 01:24:41 [runtime] (join_complete)   ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.MULTI_GEM_WELL_PROCESSOR.COUNT_GEM_WELL_PROCESSOR._BASIC_SC_RNA_COUNTER._MATRIX_COMPUTER.COLLATE_METRICS
+2025-03-05 01:24:41 [runtime] (ready)           ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.MULTI_GEM_WELL_PROCESSOR.COUNT_GEM_WELL_PROCESSOR._BASIC_SC_RNA_COUNTER._MATRIX_COMPUTER.MERGE_METRICS
+2025-03-05 01:24:41 [runtime] (run:local)       ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.MULTI_GEM_WELL_PROCESSOR.COUNT_GEM_WELL_PROCESSOR._BASIC_SC_RNA_COUNTER._MATRIX_COMPUTER.MERGE_METRICS.fork0.chnk0.main
+2025-03-05 01:24:41 [runtime] (chunks_complete) ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.MULTI_GEM_WELL_PROCESSOR.COUNT_GEM_WELL_PROCESSOR._BASIC_SC_RNA_COUNTER._MATRIX_COMPUTER.MERGE_METRICS
+2025-03-05 01:24:47 [runtime] (chunks_complete) ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.MULTI_GEM_WELL_PROCESSOR.COUNT_GEM_WELL_PROCESSOR._BASIC_SC_RNA_COUNTER._MATRIX_COMPUTER.WRITE_H5_MATRIX
+2025-03-05 01:24:47 [runtime] (ready)           ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.MULTI_GEM_WELL_PROCESSOR.COUNT_GEM_WELL_PROCESSOR._BASIC_SC_RNA_COUNTER.FILTER_BARCODES
+2025-03-05 01:24:47 [runtime] (run:local)       ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.MULTI_GEM_WELL_PROCESSOR.COUNT_GEM_WELL_PROCESSOR._BASIC_SC_RNA_COUNTER.FILTER_BARCODES.fork0.split
+2025-03-05 01:24:50 [runtime] (chunks_complete) ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.MULTI_GEM_WELL_PROCESSOR.COUNT_GEM_WELL_PROCESSOR._BASIC_SC_RNA_COUNTER._MATRIX_COMPUTER.WRITE_MATRIX_MARKET
+2025-03-05 01:24:53 [runtime] (split_complete)  ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.MULTI_GEM_WELL_PROCESSOR.COUNT_GEM_WELL_PROCESSOR._BASIC_SC_RNA_COUNTER.FILTER_BARCODES
+2025-03-05 01:24:53 [runtime] (run:local)       ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.MULTI_GEM_WELL_PROCESSOR.COUNT_GEM_WELL_PROCESSOR._BASIC_SC_RNA_COUNTER.FILTER_BARCODES.fork0.join
+2025-03-05 01:25:45 [runtime] (chunks_complete) ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.MULTI_GEM_WELL_PROCESSOR.COUNT_GEM_WELL_PROCESSOR._BASIC_SC_RNA_COUNTER._MATRIX_COMPUTER.WRITE_BARCODE_SUMMARY
+2025-03-05 01:26:28 [runtime] (join_complete)   ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.MULTI_GEM_WELL_PROCESSOR.COUNT_GEM_WELL_PROCESSOR._BASIC_SC_RNA_COUNTER.FILTER_BARCODES
+2025-03-05 01:26:28 [runtime] (ready)           ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.MULTI_GEM_WELL_PROCESSOR.VDJ_T_GEM_WELL_PROCESSOR.SC_VDJ_CONTIG_ASSEMBLER.HANDLE_GEX_CELLS
+2025-03-05 01:26:28 [runtime] (disabled)        ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.MULTI_GEM_WELL_PROCESSOR.VDJ_T_GEM_WELL_PROCESSOR.SC_VDJ_CONTIG_ASSEMBLER.HANDLE_GEX_CELLS
+2025-03-05 01:26:28 [runtime] (ready)           ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.MULTI_GEM_WELL_PROCESSOR.VDJ_B_GEM_WELL_PROCESSOR.SC_VDJ_CONTIG_ASSEMBLER.HANDLE_GEX_CELLS
+2025-03-05 01:26:28 [runtime] (disabled)        ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.MULTI_GEM_WELL_PROCESSOR.VDJ_B_GEM_WELL_PROCESSOR.SC_VDJ_CONTIG_ASSEMBLER.HANDLE_GEX_CELLS
+2025-03-05 01:26:28 [runtime] (ready)           ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.VDJ_B_CLONOTYPE_ASSIGNER.CLONOTYPE_ASSIGNER.RUN_ENCLONE
+2025-03-05 01:26:28 [runtime] (disabled)        ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.VDJ_B_CLONOTYPE_ASSIGNER.CLONOTYPE_ASSIGNER.RUN_ENCLONE
+2025-03-05 01:26:28 [runtime] (disabled)        ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.MULTI_GEM_WELL_PROCESSOR.VDJ_T_GEM_WELL_PROCESSOR
+2025-03-05 01:26:28 [runtime] (disabled)        ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.MULTI_GEM_WELL_PROCESSOR.VDJ_B_GEM_WELL_PROCESSOR
+2025-03-05 01:26:28 [runtime] (ready)           ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.VDJ_T_CLONOTYPE_ASSIGNER.CLONOTYPE_ASSIGNER.RUN_ENCLONE
+2025-03-05 01:26:28 [runtime] (disabled)        ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.VDJ_T_CLONOTYPE_ASSIGNER.CLONOTYPE_ASSIGNER.RUN_ENCLONE
+2025-03-05 01:26:28 [runtime] (ready)           ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.MULTI_GEM_WELL_PROCESSOR.COUNT_GEM_WELL_PROCESSOR._BASIC_SC_RNA_COUNTER._CELLS_REPORTER.WRITE_MOLECULE_INFO
+2025-03-05 01:26:28 [runtime] (run:local)       ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.MULTI_GEM_WELL_PROCESSOR.COUNT_GEM_WELL_PROCESSOR._BASIC_SC_RNA_COUNTER._CELLS_REPORTER.WRITE_MOLECULE_INFO.fork0.chnk0.main
+2025-03-05 01:26:28 [runtime] (ready)           ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.MULTI_GEM_WELL_PROCESSOR.COUNT_GEM_WELL_PROCESSOR._BASIC_SC_RNA_COUNTER._ASSIGN_TAGS.INFER_GEM_WELL_THROUGHPUT
+2025-03-05 01:26:28 [runtime] (run:local)       ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.MULTI_GEM_WELL_PROCESSOR.COUNT_GEM_WELL_PROCESSOR._BASIC_SC_RNA_COUNTER._ASSIGN_TAGS.INFER_GEM_WELL_THROUGHPUT.fork0.split
+2025-03-05 01:26:28 [runtime] (disabled)        ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.MULTI_GEM_WELL_PROCESSOR.VDJ_T_GEM_WELL_PROCESSOR.SC_VDJ_CONTIG_ASSEMBLER
+2025-03-05 01:26:28 [runtime] (ready)           ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.MULTI_REPORTER.VDJ_T_REPORTER.VLOUPE_PREPROCESS
+2025-03-05 01:26:28 [runtime] (disabled)        ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.MULTI_REPORTER.VDJ_T_REPORTER.VLOUPE_PREPROCESS
+2025-03-05 01:26:28 [runtime] (ready)           ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.VDJ_B_CLONOTYPE_ASSIGNER.CLONOTYPE_ASSIGNER.FILL_CLONOTYPE_INFO
+2025-03-05 01:26:28 [runtime] (disabled)        ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.VDJ_B_CLONOTYPE_ASSIGNER.CLONOTYPE_ASSIGNER.FILL_CLONOTYPE_INFO
+2025-03-05 01:26:28 [runtime] (ready)           ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.VDJ_B_CLONOTYPE_ASSIGNER.CLONOTYPE_ASSIGNER.WRITE_CONSENSUS_TXT
+2025-03-05 01:26:28 [runtime] (disabled)        ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.VDJ_B_CLONOTYPE_ASSIGNER.CLONOTYPE_ASSIGNER.WRITE_CONSENSUS_TXT
+2025-03-05 01:26:28 [runtime] (ready)           ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.VDJ_T_CLONOTYPE_ASSIGNER.CLONOTYPE_ASSIGNER.WRITE_CLONOTYPE_OUTS
+2025-03-05 01:26:28 [runtime] (disabled)        ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.VDJ_T_CLONOTYPE_ASSIGNER.CLONOTYPE_ASSIGNER.WRITE_CLONOTYPE_OUTS
+2025-03-05 01:26:28 [runtime] (disabled)        ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.MULTI_GEM_WELL_PROCESSOR.VDJ_B_GEM_WELL_PROCESSOR.SC_VDJ_CONTIG_ASSEMBLER
+2025-03-05 01:26:28 [runtime] (ready)           ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.VDJ_T_CLONOTYPE_ASSIGNER.CLONOTYPE_ASSIGNER.FILL_CLONOTYPE_INFO
+2025-03-05 01:26:28 [runtime] (disabled)        ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.VDJ_T_CLONOTYPE_ASSIGNER.CLONOTYPE_ASSIGNER.FILL_CLONOTYPE_INFO
+2025-03-05 01:26:28 [runtime] (ready)           ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.VDJ_B_CLONOTYPE_ASSIGNER.CLONOTYPE_ASSIGNER.WRITE_CLONOTYPE_OUTS
+2025-03-05 01:26:28 [runtime] (disabled)        ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.VDJ_B_CLONOTYPE_ASSIGNER.CLONOTYPE_ASSIGNER.WRITE_CLONOTYPE_OUTS
+2025-03-05 01:26:28 [runtime] (ready)           ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.VDJ_T_CLONOTYPE_ASSIGNER.CLONOTYPE_ASSIGNER.WRITE_CONSENSUS_TXT
+2025-03-05 01:26:28 [runtime] (disabled)        ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.VDJ_T_CLONOTYPE_ASSIGNER.CLONOTYPE_ASSIGNER.WRITE_CONSENSUS_TXT
+2025-03-05 01:26:28 [runtime] (ready)           ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.MULTI_REPORTER.VDJ_B_REPORTER.VLOUPE_PREPROCESS
+2025-03-05 01:26:28 [runtime] (disabled)        ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.MULTI_REPORTER.VDJ_B_REPORTER.VLOUPE_PREPROCESS
+2025-03-05 01:26:28 [runtime] (ready)           ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.VDJ_B_CLONOTYPE_ASSIGNER.HANDLE_NO_VDJ_REF
+2025-03-05 01:26:28 [runtime] (disabled)        ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.VDJ_B_CLONOTYPE_ASSIGNER.HANDLE_NO_VDJ_REF
+2025-03-05 01:26:28 [runtime] (ready)           ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.VDJ_B_CLONOTYPE_ASSIGNER.CLONOTYPE_ASSIGNER.WRITE_CONSENSUS_BAM
+2025-03-05 01:26:28 [runtime] (disabled)        ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.VDJ_B_CLONOTYPE_ASSIGNER.CLONOTYPE_ASSIGNER.WRITE_CONSENSUS_BAM
+2025-03-05 01:26:28 [runtime] (ready)           ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.COPY_VDJ_REFERENCE
+2025-03-05 01:26:28 [runtime] (disabled)        ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.COPY_VDJ_REFERENCE
+2025-03-05 01:26:28 [runtime] (ready)           ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.VDJ_T_CLONOTYPE_ASSIGNER.HANDLE_NO_VDJ_REF
+2025-03-05 01:26:28 [runtime] (disabled)        ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.VDJ_T_CLONOTYPE_ASSIGNER.HANDLE_NO_VDJ_REF
+2025-03-05 01:26:28 [runtime] (ready)           ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.VDJ_T_CLONOTYPE_ASSIGNER.CLONOTYPE_ASSIGNER.WRITE_ANN_CSV
+2025-03-05 01:26:28 [runtime] (disabled)        ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.VDJ_T_CLONOTYPE_ASSIGNER.CLONOTYPE_ASSIGNER.WRITE_ANN_CSV
+2025-03-05 01:26:28 [runtime] (ready)           ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.VDJ_B_CLONOTYPE_ASSIGNER.CLONOTYPE_ASSIGNER.WRITE_ANN_CSV
+2025-03-05 01:26:28 [runtime] (disabled)        ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.VDJ_B_CLONOTYPE_ASSIGNER.CLONOTYPE_ASSIGNER.WRITE_ANN_CSV
+2025-03-05 01:26:28 [runtime] (ready)           ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.VDJ_T_CLONOTYPE_ASSIGNER.CLONOTYPE_ASSIGNER.WRITE_CONSENSUS_BAM
+2025-03-05 01:26:28 [runtime] (disabled)        ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.VDJ_T_CLONOTYPE_ASSIGNER.CLONOTYPE_ASSIGNER.WRITE_CONSENSUS_BAM
+2025-03-05 01:26:28 [runtime] (ready)           ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.VDJ_B_CLONOTYPE_ASSIGNER.CLONOTYPE_ASSIGNER.WRITE_CONCAT_REF_OUTS
+2025-03-05 01:26:28 [runtime] (disabled)        ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.VDJ_B_CLONOTYPE_ASSIGNER.CLONOTYPE_ASSIGNER.WRITE_CONCAT_REF_OUTS
+2025-03-05 01:26:28 [runtime] (ready)           ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.VDJ_T_CLONOTYPE_ASSIGNER.CLONOTYPE_ASSIGNER.WRITE_CONCAT_REF_OUTS
+2025-03-05 01:26:28 [runtime] (disabled)        ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.VDJ_T_CLONOTYPE_ASSIGNER.CLONOTYPE_ASSIGNER.WRITE_CONCAT_REF_OUTS
+2025-03-05 01:26:28 [runtime] (ready)           ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.MULTI_REPORTER.VDJ_T_REPORTER.WRITE_CONTIG_OUTS
+2025-03-05 01:26:28 [runtime] (disabled)        ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.MULTI_REPORTER.VDJ_T_REPORTER.WRITE_CONTIG_OUTS
+2025-03-05 01:26:28 [runtime] (ready)           ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.MULTI_REPORTER.VDJ_B_REPORTER.WRITE_CONTIG_OUTS
+2025-03-05 01:26:28 [runtime] (disabled)        ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.MULTI_REPORTER.VDJ_B_REPORTER.WRITE_CONTIG_OUTS
+2025-03-05 01:26:28 [runtime] (ready)           ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.VDJ_T_CLONOTYPE_ASSIGNER.CLONOTYPE_ASSIGNER.CREATE_AIRR_TSV
+2025-03-05 01:26:28 [runtime] (disabled)        ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.VDJ_T_CLONOTYPE_ASSIGNER.CLONOTYPE_ASSIGNER.CREATE_AIRR_TSV
+2025-03-05 01:26:28 [runtime] (ready)           ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.MULTI_REPORTER.VDJ_T_REPORTER.REPORT_CONTIGS
+2025-03-05 01:26:28 [runtime] (disabled)        ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.MULTI_REPORTER.VDJ_T_REPORTER.REPORT_CONTIGS
+2025-03-05 01:26:28 [runtime] (ready)           ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.VDJ_B_CLONOTYPE_ASSIGNER.CLONOTYPE_ASSIGNER.CREATE_AIRR_TSV
+2025-03-05 01:26:28 [runtime] (disabled)        ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.VDJ_B_CLONOTYPE_ASSIGNER.CLONOTYPE_ASSIGNER.CREATE_AIRR_TSV
+2025-03-05 01:26:28 [runtime] (ready)           ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.MULTI_REPORTER.VDJ_B_REPORTER.REPORT_CONTIGS
+2025-03-05 01:26:28 [runtime] (disabled)        ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.MULTI_REPORTER.VDJ_B_REPORTER.REPORT_CONTIGS
+2025-03-05 01:26:28 [runtime] (disabled)        ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.VDJ_T_CLONOTYPE_ASSIGNER.CLONOTYPE_ASSIGNER
+2025-03-05 01:26:28 [runtime] (ready)           ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.MULTI_REPORTER.VDJ_T_REPORTER.SUMMARIZE_VDJ_REPORTS
+2025-03-05 01:26:28 [runtime] (disabled)        ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.MULTI_REPORTER.VDJ_T_REPORTER.SUMMARIZE_VDJ_REPORTS
+2025-03-05 01:26:28 [runtime] (disabled)        ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.VDJ_B_CLONOTYPE_ASSIGNER
+2025-03-05 01:26:28 [runtime] (disabled)        ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.VDJ_T_CLONOTYPE_ASSIGNER
+2025-03-05 01:26:28 [runtime] (ready)           ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.MULTI_REPORTER.VDJ_B_REPORTER.SUMMARIZE_VDJ_REPORTS
+2025-03-05 01:26:28 [runtime] (disabled)        ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.MULTI_REPORTER.VDJ_B_REPORTER.SUMMARIZE_VDJ_REPORTS
+2025-03-05 01:26:28 [runtime] (ready)           ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.MULTI_REPORTER.VDJ_T_REPORTER.WRITE_CONTIG_PROTO
+2025-03-05 01:26:28 [runtime] (disabled)        ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.MULTI_REPORTER.VDJ_T_REPORTER.WRITE_CONTIG_PROTO
+2025-03-05 01:26:28 [runtime] (disabled)        ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.VDJ_B_CLONOTYPE_ASSIGNER.CLONOTYPE_ASSIGNER
+2025-03-05 01:26:28 [runtime] (ready)           ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.MULTI_REPORTER.VDJ_B_REPORTER.WRITE_CONTIG_PROTO
+2025-03-05 01:26:28 [runtime] (disabled)        ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.MULTI_REPORTER.VDJ_B_REPORTER.WRITE_CONTIG_PROTO
+2025-03-05 01:26:28 [runtime] (disabled)        ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.MULTI_REPORTER.VDJ_T_REPORTER
+2025-03-05 01:26:28 [runtime] (disabled)        ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.MULTI_REPORTER.VDJ_B_REPORTER
+2025-03-05 01:26:32 [runtime] (split_complete)  ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.MULTI_GEM_WELL_PROCESSOR.COUNT_GEM_WELL_PROCESSOR._BASIC_SC_RNA_COUNTER._ASSIGN_TAGS.INFER_GEM_WELL_THROUGHPUT
+2025-03-05 01:26:32 [runtime] (run:local)       ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.MULTI_GEM_WELL_PROCESSOR.COUNT_GEM_WELL_PROCESSOR._BASIC_SC_RNA_COUNTER._ASSIGN_TAGS.INFER_GEM_WELL_THROUGHPUT.fork0.join
+2025-03-05 01:26:36 [runtime] (join_complete)   ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.MULTI_GEM_WELL_PROCESSOR.COUNT_GEM_WELL_PROCESSOR._BASIC_SC_RNA_COUNTER._ASSIGN_TAGS.INFER_GEM_WELL_THROUGHPUT
+2025-03-05 01:26:36 [runtime] (ready)           ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.MULTI_GEM_WELL_PROCESSOR.COUNT_GEM_WELL_PROCESSOR._BASIC_SC_RNA_COUNTER._ASSIGN_TAGS.CALL_TAGS_MARGINAL
+2025-03-05 01:26:36 [runtime] (run:local)       ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.MULTI_GEM_WELL_PROCESSOR.COUNT_GEM_WELL_PROCESSOR._BASIC_SC_RNA_COUNTER._ASSIGN_TAGS.CALL_TAGS_MARGINAL.fork0.split
+2025-03-05 01:26:39 [runtime] (split_complete)  ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.MULTI_GEM_WELL_PROCESSOR.COUNT_GEM_WELL_PROCESSOR._BASIC_SC_RNA_COUNTER._ASSIGN_TAGS.CALL_TAGS_MARGINAL
+2025-03-05 01:26:39 [runtime] (run:local)       ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.MULTI_GEM_WELL_PROCESSOR.COUNT_GEM_WELL_PROCESSOR._BASIC_SC_RNA_COUNTER._ASSIGN_TAGS.CALL_TAGS_MARGINAL.fork0.join
+2025-03-05 01:26:39 [jobmngr] Need 16 GB of memory to start the next job (13 GB of memory available).  Waiting for jobs to complete.
+2025-03-05 01:27:28 [jobmngr] Need 16 GB of memory to start the next job (15 GB of memory available). Waiting for jobs to complete.
+2025-03-05 01:27:32 [runtime] (join_complete)   ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.MULTI_GEM_WELL_PROCESSOR.COUNT_GEM_WELL_PROCESSOR._BASIC_SC_RNA_COUNTER._ASSIGN_TAGS.CALL_TAGS_MARGINAL
+2025-03-05 01:27:39 [runtime] (chunks_complete) ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.MULTI_GEM_WELL_PROCESSOR.COUNT_GEM_WELL_PROCESSOR._BASIC_SC_RNA_COUNTER._CELLS_REPORTER.WRITE_MOLECULE_INFO
+2025-03-05 01:27:39 [runtime] (ready)           ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.MULTI_GEM_WELL_PROCESSOR.COUNT_GEM_WELL_PROCESSOR._BASIC_SC_RNA_COUNTER._ASSIGN_TAGS.CALL_TAGS_JIBES
+2025-03-05 01:27:39 [runtime] (run:local)       ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.MULTI_GEM_WELL_PROCESSOR.COUNT_GEM_WELL_PROCESSOR._BASIC_SC_RNA_COUNTER._ASSIGN_TAGS.CALL_TAGS_JIBES.fork0.split
+2025-03-05 01:27:39 [runtime] (ready)           ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.MULTI_GEM_WELL_PROCESSOR.COUNT_GEM_WELL_PROCESSOR._BASIC_SC_RNA_COUNTER._CELLS_REPORTER.SUBSAMPLE_READS
+2025-03-05 01:27:39 [runtime] (run:local)       ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.MULTI_GEM_WELL_PROCESSOR.COUNT_GEM_WELL_PROCESSOR._BASIC_SC_RNA_COUNTER._CELLS_REPORTER.SUBSAMPLE_READS.fork0.split
+2025-03-05 01:27:42 [runtime] (split_complete)  ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.MULTI_GEM_WELL_PROCESSOR.COUNT_GEM_WELL_PROCESSOR._BASIC_SC_RNA_COUNTER._CELLS_REPORTER.SUBSAMPLE_READS
+2025-03-05 01:27:42 [runtime] (run:local)       ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.MULTI_GEM_WELL_PROCESSOR.COUNT_GEM_WELL_PROCESSOR._BASIC_SC_RNA_COUNTER._CELLS_REPORTER.SUBSAMPLE_READS.fork0.chnk0.main
+2025-03-05 01:27:42 [runtime] (run:local)       ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.MULTI_GEM_WELL_PROCESSOR.COUNT_GEM_WELL_PROCESSOR._BASIC_SC_RNA_COUNTER._CELLS_REPORTER.SUBSAMPLE_READS.fork0.chnk1.main
+2025-03-05 01:27:42 [runtime] (run:local)       ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.MULTI_GEM_WELL_PROCESSOR.COUNT_GEM_WELL_PROCESSOR._BASIC_SC_RNA_COUNTER._CELLS_REPORTER.SUBSAMPLE_READS.fork0.chnk2.main
+2025-03-05 01:27:42 [runtime] (run:local)       ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.MULTI_GEM_WELL_PROCESSOR.COUNT_GEM_WELL_PROCESSOR._BASIC_SC_RNA_COUNTER._CELLS_REPORTER.SUBSAMPLE_READS.fork0.chnk3.main
+2025-03-05 01:27:42 [runtime] (chunks_complete) ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.MULTI_GEM_WELL_PROCESSOR.COUNT_GEM_WELL_PROCESSOR._BASIC_SC_RNA_COUNTER.WRITE_POS_BAM
+2025-03-05 01:27:42 [runtime] (run:local)       ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.MULTI_GEM_WELL_PROCESSOR.COUNT_GEM_WELL_PROCESSOR._BASIC_SC_RNA_COUNTER.WRITE_POS_BAM.fork0.join
+2025-03-05 01:27:43 [runtime] (split_complete)  ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.MULTI_GEM_WELL_PROCESSOR.COUNT_GEM_WELL_PROCESSOR._BASIC_SC_RNA_COUNTER._ASSIGN_TAGS.CALL_TAGS_JIBES
+2025-03-05 01:27:43 [runtime] (run:local)       ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.MULTI_GEM_WELL_PROCESSOR.COUNT_GEM_WELL_PROCESSOR._BASIC_SC_RNA_COUNTER._ASSIGN_TAGS.CALL_TAGS_JIBES.fork0.join
+2025-03-05 01:27:48 [runtime] (join_complete)   ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.MULTI_GEM_WELL_PROCESSOR.COUNT_GEM_WELL_PROCESSOR._BASIC_SC_RNA_COUNTER._ASSIGN_TAGS.CALL_TAGS_JIBES
+2025-03-05 01:27:48 [runtime] (ready)           ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.MULTI_GEM_WELL_PROCESSOR.COUNT_GEM_WELL_PROCESSOR._BASIC_SC_RNA_COUNTER._ASSIGN_TAGS.DETERMINE_SAMPLE_ASSIGNMENTS
+2025-03-05 01:27:48 [runtime] (run:local)       ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.MULTI_GEM_WELL_PROCESSOR.COUNT_GEM_WELL_PROCESSOR._BASIC_SC_RNA_COUNTER._ASSIGN_TAGS.DETERMINE_SAMPLE_ASSIGNMENTS.fork0.chnk0.main
+2025-03-05 01:27:49 [runtime] (chunks_complete) ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.MULTI_GEM_WELL_PROCESSOR.COUNT_GEM_WELL_PROCESSOR._BASIC_SC_RNA_COUNTER._ASSIGN_TAGS.DETERMINE_SAMPLE_ASSIGNMENTS
+2025-03-05 01:27:49 [runtime] (ready)           ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.MULTI_GEM_WELL_PROCESSOR.COUNT_GEM_WELL_PROCESSOR._BASIC_SC_RNA_COUNTER.MULTI_WRITE_PER_SAMPLE_MATRICES
+2025-03-05 01:27:49 [runtime] (disabled)        ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.MULTI_GEM_WELL_PROCESSOR.COUNT_GEM_WELL_PROCESSOR._BASIC_SC_RNA_COUNTER.MULTI_WRITE_PER_SAMPLE_MATRICES
+2025-03-05 01:27:49 [runtime] (ready)           ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.MULTI_GEM_WELL_PROCESSOR.COUNT_GEM_WELL_PROCESSOR._BASIC_SC_RNA_COUNTER.MULTI_COLLATE_PER_SAMPLE_METRICS
+2025-03-05 01:27:49 [runtime] (disabled)        ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.MULTI_GEM_WELL_PROCESSOR.COUNT_GEM_WELL_PROCESSOR._BASIC_SC_RNA_COUNTER.MULTI_COLLATE_PER_SAMPLE_METRICS
+2025-03-05 01:27:49 [runtime] (ready)           ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.MULTI_GEM_WELL_PROCESSOR.COUNT_GEM_WELL_PROCESSOR._BASIC_SC_RNA_COUNTER.MULTI_WRITE_PER_SAMPLE_BAM
+2025-03-05 01:27:49 [runtime] (disabled)        ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.MULTI_GEM_WELL_PROCESSOR.COUNT_GEM_WELL_PROCESSOR._BASIC_SC_RNA_COUNTER.MULTI_WRITE_PER_SAMPLE_BAM
+2025-03-05 01:27:49 [runtime] (ready)           ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.MULTI_GEM_WELL_PROCESSOR.COUNT_GEM_WELL_PROCESSOR._BASIC_SC_RNA_COUNTER._ASSIGN_TAGS.COMPUTE_EXTRA_MULTIPLEXING_METRICS
+2025-03-05 01:27:49 [runtime] (run:local)       ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.MULTI_GEM_WELL_PROCESSOR.COUNT_GEM_WELL_PROCESSOR._BASIC_SC_RNA_COUNTER._ASSIGN_TAGS.COMPUTE_EXTRA_MULTIPLEXING_METRICS.fork0.split
+2025-03-05 01:27:49 [runtime] (ready)           ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.MULTI_GEM_WELL_PROCESSOR.COUNT_GEM_WELL_PROCESSOR._BASIC_SC_RNA_COUNTER.MULTI_WRITE_PER_SAMPLE_MOLECULE_INFO
+2025-03-05 01:27:49 [runtime] (disabled)        ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.MULTI_GEM_WELL_PROCESSOR.COUNT_GEM_WELL_PROCESSOR._BASIC_SC_RNA_COUNTER.MULTI_WRITE_PER_SAMPLE_MOLECULE_INFO
+2025-03-05 01:27:49 [runtime] (ready)           ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.STRUCTIFY_PER_SAMPLE_OUTS
+2025-03-05 01:27:49 [runtime] (run:local)       ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.STRUCTIFY_PER_SAMPLE_OUTS.fork0.chnk0.main
+2025-03-05 01:27:50 [runtime] (chunks_complete) ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.STRUCTIFY_PER_SAMPLE_OUTS
+2025-03-05 01:27:50 [runtime] (disabled)        ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.SAMPLE_REPORTER
+2025-03-05 01:27:50 [runtime] (ready)           ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.DISABLE_FEATURE_STAGES
+2025-03-05 01:27:50 [runtime] (run:local)       ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.DISABLE_FEATURE_STAGES.fork0.chnk0.main
+2025-03-05 01:27:50 [runtime] (chunks_complete) ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.DISABLE_FEATURE_STAGES
+2025-03-05 01:27:50 [runtime] (ready)           ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.COUNT_ANALYZER.SC_RNA_ANALYZER.ANALYZER_PREFLIGHT
+2025-03-05 01:27:50 [runtime] (run:local)       ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.COUNT_ANALYZER.SC_RNA_ANALYZER.ANALYZER_PREFLIGHT.fork0.chnk0.main
+2025-03-05 01:27:50 [runtime] (ready)           ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.COUNT_ANALYZER._TARGETED_ANALYZER.SUBSAMPLE_OFF_TARGET_READS
+2025-03-05 01:27:50 [runtime] (disabled)        ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.COUNT_ANALYZER._TARGETED_ANALYZER.SUBSAMPLE_OFF_TARGET_READS
+2025-03-05 01:27:50 [runtime] (ready)           ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.COUNT_ANALYZER._TARGETED_ANALYZER.SUBSAMPLE_ON_TARGET_READS
+2025-03-05 01:27:50 [runtime] (disabled)        ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.COUNT_ANALYZER._TARGETED_ANALYZER.SUBSAMPLE_ON_TARGET_READS
+2025-03-05 01:27:50 [runtime] (ready)           ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.COUNT_ANALYZER._ANTIBODY_ANALYZER.SUMMARIZE_ANTIBODY_ANALYSIS
+2025-03-05 01:27:50 [runtime] (disabled)        ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.COUNT_ANALYZER._ANTIBODY_ANALYZER.SUMMARIZE_ANTIBODY_ANALYSIS
+2025-03-05 01:27:50 [runtime] (ready)           ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.COUNT_ANALYZER._ANTIBODY_ANALYZER.CALL_ANTIBODIES
+2025-03-05 01:27:50 [runtime] (disabled)        ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.COUNT_ANALYZER._ANTIBODY_ANALYZER.CALL_ANTIBODIES
+2025-03-05 01:27:50 [runtime] (disabled)        ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.SAMPLE_ANALYZER
+2025-03-05 01:27:50 [runtime] (disabled)        ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.COUNT_ANALYZER._ANTIBODY_ANALYZER
+2025-03-05 01:27:51 [runtime] (split_complete)  ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.MULTI_GEM_WELL_PROCESSOR.COUNT_GEM_WELL_PROCESSOR._BASIC_SC_RNA_COUNTER._ASSIGN_TAGS.COMPUTE_EXTRA_MULTIPLEXING_METRICS
+2025-03-05 01:27:51 [runtime] (run:local)       ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.MULTI_GEM_WELL_PROCESSOR.COUNT_GEM_WELL_PROCESSOR._BASIC_SC_RNA_COUNTER._ASSIGN_TAGS.COMPUTE_EXTRA_MULTIPLEXING_METRICS.fork0.join
+2025-03-05 01:27:52 [runtime] (chunks_complete) ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.COUNT_ANALYZER.SC_RNA_ANALYZER.ANALYZER_PREFLIGHT
+2025-03-05 01:27:52 [runtime] (ready)           ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.COUNT_ANALYZER.SC_RNA_ANALYZER.PREPROCESS_MATRIX
+2025-03-05 01:27:52 [runtime] (run:local)       ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.COUNT_ANALYZER.SC_RNA_ANALYZER.PREPROCESS_MATRIX.fork0.split
+2025-03-05 01:27:53 [runtime] (join_complete)   ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.MULTI_GEM_WELL_PROCESSOR.COUNT_GEM_WELL_PROCESSOR._BASIC_SC_RNA_COUNTER._ASSIGN_TAGS.COMPUTE_EXTRA_MULTIPLEXING_METRICS
+2025-03-05 01:27:53 [runtime] (ready)           ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.MULTI_GEM_WELL_PROCESSOR.COUNT_GEM_WELL_PROCESSOR._BASIC_SC_RNA_COUNTER._ASSIGN_TAGS.MERGE_METRICS
+2025-03-05 01:27:53 [runtime] (run:local)       ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.MULTI_GEM_WELL_PROCESSOR.COUNT_GEM_WELL_PROCESSOR._BASIC_SC_RNA_COUNTER._ASSIGN_TAGS.MERGE_METRICS.fork0.chnk0.main
+2025-03-05 01:27:53 [runtime] (chunks_complete) ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.MULTI_GEM_WELL_PROCESSOR.COUNT_GEM_WELL_PROCESSOR._BASIC_SC_RNA_COUNTER._ASSIGN_TAGS.MERGE_METRICS
+2025-03-05 01:27:55 [runtime] (join_complete)   ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.MULTI_GEM_WELL_PROCESSOR.COUNT_GEM_WELL_PROCESSOR._BASIC_SC_RNA_COUNTER.WRITE_POS_BAM
+2025-03-05 01:27:56 [runtime] (split_complete)  ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.COUNT_ANALYZER.SC_RNA_ANALYZER.PREPROCESS_MATRIX
+2025-03-05 01:27:56 [runtime] (run:local)       ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.COUNT_ANALYZER.SC_RNA_ANALYZER.PREPROCESS_MATRIX.fork0.join
+2025-03-05 01:28:02 [runtime] (join_complete)   ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.COUNT_ANALYZER.SC_RNA_ANALYZER.PREPROCESS_MATRIX
+2025-03-05 01:28:02 [runtime] (ready)           ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.COUNT_ANALYZER.SC_RNA_ANALYZER.RUN_PCA
+2025-03-05 01:28:02 [runtime] (run:local)       ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.COUNT_ANALYZER.SC_RNA_ANALYZER.RUN_PCA.fork0.split
+2025-03-05 01:28:02 [runtime] (ready)           ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.COUNT_ANALYZER.SC_RNA_ANALYZER.RUN_FBPCA
+2025-03-05 01:28:02 [runtime] (disabled)        ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.COUNT_ANALYZER.SC_RNA_ANALYZER.RUN_FBPCA
+2025-03-05 01:28:02 [runtime] (ready)           ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.COUNT_ANALYZER.SC_RNA_ANALYZER.RUN_MULTIGENOME_ANALYSIS
+2025-03-05 01:28:02 [runtime] (run:local)       ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.COUNT_ANALYZER.SC_RNA_ANALYZER.RUN_MULTIGENOME_ANALYSIS.fork0.split
+2025-03-05 01:28:02 [runtime] (ready)           ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.COUNT_ANALYZER.SC_RNA_ANALYZER.CORRECT_CHEMISTRY_BATCH
+2025-03-05 01:28:02 [runtime] (disabled)        ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.COUNT_ANALYZER.SC_RNA_ANALYZER.CORRECT_CHEMISTRY_BATCH
+2025-03-05 01:28:02 [runtime] (split_complete)  ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.COUNT_ANALYZER.SC_RNA_ANALYZER.RUN_PCA
+2025-03-05 01:28:02 [runtime] (run:local)       ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.COUNT_ANALYZER.SC_RNA_ANALYZER.RUN_PCA.fork0.join
+2025-03-05 01:28:04 [runtime] (split_complete)  ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.COUNT_ANALYZER.SC_RNA_ANALYZER.RUN_MULTIGENOME_ANALYSIS
+2025-03-05 01:28:04 [runtime] (run:local)       ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.COUNT_ANALYZER.SC_RNA_ANALYZER.RUN_MULTIGENOME_ANALYSIS.fork0.join
+2025-03-05 01:28:06 [runtime] (join_complete)   ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.COUNT_ANALYZER.SC_RNA_ANALYZER.RUN_MULTIGENOME_ANALYSIS
+2025-03-05 01:28:07 [runtime] (join_complete)   ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.COUNT_ANALYZER.SC_RNA_ANALYZER.RUN_PCA
+2025-03-05 01:28:07 [runtime] (ready)           ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.COUNT_ANALYZER.SC_RNA_ANALYZER.CHOOSE_DIMENSION_REDUCTION_OUTPUT
+2025-03-05 01:28:07 [runtime] (run:local)       ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.COUNT_ANALYZER.SC_RNA_ANALYZER.CHOOSE_DIMENSION_REDUCTION_OUTPUT.fork0.chnk0.main
+2025-03-05 01:28:07 [runtime] (chunks_complete) ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.COUNT_ANALYZER.SC_RNA_ANALYZER.CHOOSE_DIMENSION_REDUCTION_OUTPUT
+2025-03-05 01:28:08 [runtime] (ready)           ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.COUNT_ANALYZER.SC_RNA_ANALYZER.RUN_UMAP
+2025-03-05 01:28:08 [runtime] (run:local)       ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.COUNT_ANALYZER.SC_RNA_ANALYZER.RUN_UMAP.fork0.split
+2025-03-05 01:28:08 [runtime] (ready)           ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.COUNT_ANALYZER.SC_RNA_ANALYZER.RUN_GRAPH_CLUSTERING
+2025-03-05 01:28:08 [runtime] (run:local)       ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.COUNT_ANALYZER.SC_RNA_ANALYZER.RUN_GRAPH_CLUSTERING.fork0.split
+2025-03-05 01:28:08 [runtime] (ready)           ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.COUNT_ANALYZER.SC_RNA_ANALYZER.RUN_TSNE
+2025-03-05 01:28:08 [runtime] (run:local)       ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.COUNT_ANALYZER.SC_RNA_ANALYZER.RUN_TSNE.fork0.split
+2025-03-05 01:28:08 [runtime] (ready)           ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.COUNT_ANALYZER.SC_RNA_ANALYZER.RUN_KMEANS
+2025-03-05 01:28:08 [runtime] (run:local)       ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.COUNT_ANALYZER.SC_RNA_ANALYZER.RUN_KMEANS.fork0.split
+2025-03-05 01:28:08 [runtime] (split_complete)  ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.COUNT_ANALYZER.SC_RNA_ANALYZER.RUN_GRAPH_CLUSTERING
+2025-03-05 01:28:08 [runtime] (run:local)       ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.COUNT_ANALYZER.SC_RNA_ANALYZER.RUN_GRAPH_CLUSTERING.fork0.join
+2025-03-05 01:28:08 [runtime] (split_complete)  ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.COUNT_ANALYZER.SC_RNA_ANALYZER.RUN_TSNE
+2025-03-05 01:28:08 [runtime] (run:local)       ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.COUNT_ANALYZER.SC_RNA_ANALYZER.RUN_TSNE.fork0.chnk0.main
+2025-03-05 01:28:08 [runtime] (split_complete)  ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.COUNT_ANALYZER.SC_RNA_ANALYZER.RUN_UMAP
+2025-03-05 01:28:08 [runtime] (run:local)       ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.COUNT_ANALYZER.SC_RNA_ANALYZER.RUN_UMAP.fork0.chnk0.main
+2025-03-05 01:28:10 [runtime] (split_complete)  ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.COUNT_ANALYZER.SC_RNA_ANALYZER.RUN_KMEANS
+2025-03-05 01:28:10 [runtime] (run:local)       ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.COUNT_ANALYZER.SC_RNA_ANALYZER.RUN_KMEANS.fork0.chnk0.main
+2025-03-05 01:28:10 [runtime] (run:local)       ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.COUNT_ANALYZER.SC_RNA_ANALYZER.RUN_KMEANS.fork0.chnk1.main
+2025-03-05 01:28:10 [runtime] (run:local)       ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.COUNT_ANALYZER.SC_RNA_ANALYZER.RUN_KMEANS.fork0.chnk2.main
+2025-03-05 01:28:10 [runtime] (run:local)       ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.COUNT_ANALYZER.SC_RNA_ANALYZER.RUN_KMEANS.fork0.chnk3.main
+2025-03-05 01:28:10 [runtime] (run:local)       ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.COUNT_ANALYZER.SC_RNA_ANALYZER.RUN_KMEANS.fork0.chnk4.main
+2025-03-05 01:28:10 [jobmngr] Need 3 GB of memory to start the next job (1 GB of memory available).  Waiting for jobs to complete.
+2025-03-05 01:28:10 [runtime] (run:local)       ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.COUNT_ANALYZER.SC_RNA_ANALYZER.RUN_KMEANS.fork0.chnk5.main
+2025-03-05 01:28:10 [runtime] (run:local)       ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.COUNT_ANALYZER.SC_RNA_ANALYZER.RUN_KMEANS.fork0.chnk6.main
+2025-03-05 01:28:10 [runtime] (run:local)       ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.COUNT_ANALYZER.SC_RNA_ANALYZER.RUN_KMEANS.fork0.chnk7.main
+2025-03-05 01:28:10 [runtime] (run:local)       ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.COUNT_ANALYZER.SC_RNA_ANALYZER.RUN_KMEANS.fork0.chnk8.main
+2025-03-05 01:28:10 [runtime] (join_complete)   ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.COUNT_ANALYZER.SC_RNA_ANALYZER.RUN_GRAPH_CLUSTERING
+2025-03-05 01:28:14 [runtime] (chunks_complete) ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.COUNT_ANALYZER.SC_RNA_ANALYZER.RUN_TSNE
+2025-03-05 01:28:14 [runtime] (run:local)       ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.COUNT_ANALYZER.SC_RNA_ANALYZER.RUN_TSNE.fork0.join
+2025-03-05 01:28:14 [runtime] (join_complete)   ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.COUNT_ANALYZER.SC_RNA_ANALYZER.RUN_TSNE
+2025-03-05 01:28:16 [runtime] (chunks_complete) ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.COUNT_ANALYZER.SC_RNA_ANALYZER.RUN_KMEANS
+2025-03-05 01:28:16 [runtime] (run:local)       ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.COUNT_ANALYZER.SC_RNA_ANALYZER.RUN_KMEANS.fork0.join
+2025-03-05 01:28:19 [runtime] (join_complete)   ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.COUNT_ANALYZER.SC_RNA_ANALYZER.RUN_KMEANS
+2025-03-05 01:28:19 [runtime] (ready)           ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.COUNT_ANALYZER.SC_RNA_ANALYZER.COMBINE_CLUSTERING
+2025-03-05 01:28:19 [runtime] (run:local)       ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.COUNT_ANALYZER.SC_RNA_ANALYZER.COMBINE_CLUSTERING.fork0.chnk0.main
+2025-03-05 01:28:20 [runtime] (chunks_complete) ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.COUNT_ANALYZER.SC_RNA_ANALYZER.COMBINE_CLUSTERING
+2025-03-05 01:28:20 [runtime] (ready)           ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.COUNT_ANALYZER.SC_RNA_ANALYZER.RUN_DIFFERENTIAL_EXPRESSION
+2025-03-05 01:28:20 [runtime] (run:local)       ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.COUNT_ANALYZER.SC_RNA_ANALYZER.RUN_DIFFERENTIAL_EXPRESSION.fork0.split
+2025-03-05 01:28:20 [runtime] (split_complete)  ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.COUNT_ANALYZER.SC_RNA_ANALYZER.RUN_DIFFERENTIAL_EXPRESSION
+2025-03-05 01:28:20 [runtime] (run:local)       ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.COUNT_ANALYZER.SC_RNA_ANALYZER.RUN_DIFFERENTIAL_EXPRESSION.fork0.chnk0.main
+2025-03-05 01:28:20 [runtime] (run:local)       ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.COUNT_ANALYZER.SC_RNA_ANALYZER.RUN_DIFFERENTIAL_EXPRESSION.fork0.chnk1.main
+2025-03-05 01:28:20 [runtime] (run:local)       ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.COUNT_ANALYZER.SC_RNA_ANALYZER.RUN_DIFFERENTIAL_EXPRESSION.fork0.chnk2.main
+2025-03-05 01:28:20 [runtime] (run:local)       ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.COUNT_ANALYZER.SC_RNA_ANALYZER.RUN_DIFFERENTIAL_EXPRESSION.fork0.chnk3.main
+2025-03-05 01:28:20 [runtime] (run:local)       ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.COUNT_ANALYZER.SC_RNA_ANALYZER.RUN_DIFFERENTIAL_EXPRESSION.fork0.chnk4.main
+2025-03-05 01:28:20 [runtime] (run:local)       ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.COUNT_ANALYZER.SC_RNA_ANALYZER.RUN_DIFFERENTIAL_EXPRESSION.fork0.chnk5.main
+2025-03-05 01:28:20 [runtime] (run:local)       ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.COUNT_ANALYZER.SC_RNA_ANALYZER.RUN_DIFFERENTIAL_EXPRESSION.fork0.chnk6.main
+2025-03-05 01:28:20 [runtime] (run:local)       ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.COUNT_ANALYZER.SC_RNA_ANALYZER.RUN_DIFFERENTIAL_EXPRESSION.fork0.chnk7.main
+2025-03-05 01:28:31 [runtime] (chunks_complete) ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.COUNT_ANALYZER.SC_RNA_ANALYZER.RUN_UMAP
+2025-03-05 01:28:31 [runtime] (run:local)       ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.COUNT_ANALYZER.SC_RNA_ANALYZER.RUN_UMAP.fork0.join
+2025-03-05 01:28:31 [runtime] (join_complete)   ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.COUNT_ANALYZER.SC_RNA_ANALYZER.RUN_UMAP
+2025-03-05 01:28:34 [runtime] (chunks_complete) ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.COUNT_ANALYZER.SC_RNA_ANALYZER.RUN_DIFFERENTIAL_EXPRESSION
+2025-03-05 01:28:34 [runtime] (run:local)       ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.COUNT_ANALYZER.SC_RNA_ANALYZER.RUN_DIFFERENTIAL_EXPRESSION.fork0.join
+2025-03-05 01:28:34 [runtime] (chunks_complete) ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.MULTI_GEM_WELL_PROCESSOR.COUNT_GEM_WELL_PROCESSOR._BASIC_SC_RNA_COUNTER._CELLS_REPORTER.SUBSAMPLE_READS
+2025-03-05 01:28:34 [runtime] (run:local)       ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.MULTI_GEM_WELL_PROCESSOR.COUNT_GEM_WELL_PROCESSOR._BASIC_SC_RNA_COUNTER._CELLS_REPORTER.SUBSAMPLE_READS.fork0.join
+2025-03-05 01:28:35 [runtime] (join_complete)   ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.COUNT_ANALYZER.SC_RNA_ANALYZER.RUN_DIFFERENTIAL_EXPRESSION
+2025-03-05 01:28:35 [runtime] (ready)           ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.COUNT_ANALYZER.SC_RNA_ANALYZER.SUMMARIZE_ANALYSIS
+2025-03-05 01:28:35 [runtime] (run:local)       ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.COUNT_ANALYZER.SC_RNA_ANALYZER.SUMMARIZE_ANALYSIS.fork0.split
+2025-03-05 01:28:35 [runtime] (split_complete)  ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.COUNT_ANALYZER.SC_RNA_ANALYZER.SUMMARIZE_ANALYSIS
+2025-03-05 01:28:35 [runtime] (run:local)       ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.COUNT_ANALYZER.SC_RNA_ANALYZER.SUMMARIZE_ANALYSIS.fork0.chnk0.main
+2025-03-05 01:28:36 [runtime] (join_complete)   ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.MULTI_GEM_WELL_PROCESSOR.COUNT_GEM_WELL_PROCESSOR._BASIC_SC_RNA_COUNTER._CELLS_REPORTER.SUBSAMPLE_READS
+2025-03-05 01:28:36 [runtime] (ready)           ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.MULTI_GEM_WELL_PROCESSOR.COUNT_GEM_WELL_PROCESSOR._BASIC_SC_RNA_COUNTER._CELLS_REPORTER.SUMMARIZE_BASIC_REPORTS
+2025-03-05 01:28:36 [runtime] (run:local)       ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.MULTI_GEM_WELL_PROCESSOR.COUNT_GEM_WELL_PROCESSOR._BASIC_SC_RNA_COUNTER._CELLS_REPORTER.SUMMARIZE_BASIC_REPORTS.fork0.split
+2025-03-05 01:28:37 [runtime] (chunks_complete) ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.COUNT_ANALYZER.SC_RNA_ANALYZER.SUMMARIZE_ANALYSIS
+2025-03-05 01:28:37 [runtime] (run:local)       ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.COUNT_ANALYZER.SC_RNA_ANALYZER.SUMMARIZE_ANALYSIS.fork0.join
+2025-03-05 01:28:38 [runtime] (join_complete)   ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.COUNT_ANALYZER.SC_RNA_ANALYZER.SUMMARIZE_ANALYSIS
+2025-03-05 01:28:38 [runtime] (ready)           ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.MULTI_REPORTER.GENERATE_LIBRARY_PLOTS
+2025-03-05 01:28:38 [runtime] (disabled)        ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.MULTI_REPORTER.GENERATE_LIBRARY_PLOTS
+2025-03-05 01:28:38 [runtime] (split_complete)  ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.MULTI_GEM_WELL_PROCESSOR.COUNT_GEM_WELL_PROCESSOR._BASIC_SC_RNA_COUNTER._CELLS_REPORTER.SUMMARIZE_BASIC_REPORTS
+2025-03-05 01:28:38 [runtime] (run:local)       ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.MULTI_GEM_WELL_PROCESSOR.COUNT_GEM_WELL_PROCESSOR._BASIC_SC_RNA_COUNTER._CELLS_REPORTER.SUMMARIZE_BASIC_REPORTS.fork0.join
+2025-03-05 01:28:45 [runtime] (join_complete)   ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.MULTI_GEM_WELL_PROCESSOR.COUNT_GEM_WELL_PROCESSOR._BASIC_SC_RNA_COUNTER._CELLS_REPORTER.SUMMARIZE_BASIC_REPORTS
+2025-03-05 01:28:45 [runtime] (ready)           ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.MULTI_GEM_WELL_PROCESSOR.COUNT_GEM_WELL_PROCESSOR._BASIC_SC_RNA_COUNTER.MERGE_METRICS
+2025-03-05 01:28:45 [runtime] (run:local)       ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.MULTI_GEM_WELL_PROCESSOR.COUNT_GEM_WELL_PROCESSOR._BASIC_SC_RNA_COUNTER.MERGE_METRICS.fork0.chnk0.main
+2025-03-05 01:28:46 [runtime] (chunks_complete) ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.MULTI_GEM_WELL_PROCESSOR.COUNT_GEM_WELL_PROCESSOR._BASIC_SC_RNA_COUNTER.MERGE_METRICS
+2025-03-05 01:28:46 [runtime] (ready)           ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.COUNT_ANALYZER._TARGETED_ANALYZER.CALCULATE_TARGETED_METRICS
+2025-03-05 01:28:46 [runtime] (disabled)        ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.COUNT_ANALYZER._TARGETED_ANALYZER.CALCULATE_TARGETED_METRICS
+2025-03-05 01:28:46 [runtime] (ready)           ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.COUNT_ANALYZER._TARGETED_ANALYZER.SUMMARIZE_TARGETED_ANALYSIS
+2025-03-05 01:28:46 [runtime] (disabled)        ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.COUNT_ANALYZER._TARGETED_ANALYZER.SUMMARIZE_TARGETED_ANALYSIS
+2025-03-05 01:28:46 [runtime] (ready)           ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.COUNT_ANALYZER._CRISPR_ANALYZER.CALL_PROTOSPACERS
+2025-03-05 01:28:46 [runtime] (disabled)        ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.COUNT_ANALYZER._CRISPR_ANALYZER.CALL_PROTOSPACERS
+2025-03-05 01:28:46 [runtime] (disabled)        ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.COUNT_ANALYZER._TARGETED_ANALYZER
+2025-03-05 01:28:46 [runtime] (ready)           ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.MULTI_REPORTER.SUMMARIZE_REPORTS
+2025-03-05 01:28:46 [runtime] (run:local)       ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.MULTI_REPORTER.SUMMARIZE_REPORTS.fork0.chnk0.main
+2025-03-05 01:28:46 [runtime] (ready)           ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.COUNT_ANALYZER._CRISPR_ANALYZER._PERTURBATIONS_BY_TARGET
+2025-03-05 01:28:46 [runtime] (disabled)        ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.COUNT_ANALYZER._CRISPR_ANALYZER._PERTURBATIONS_BY_TARGET
+2025-03-05 01:28:46 [runtime] (ready)           ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.COUNT_ANALYZER._CRISPR_ANALYZER._PERTURBATIONS_BY_FEATURE
+2025-03-05 01:28:46 [runtime] (disabled)        ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.COUNT_ANALYZER._CRISPR_ANALYZER._PERTURBATIONS_BY_FEATURE
+2025-03-05 01:28:46 [runtime] (ready)           ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.COUNT_ANALYZER._CRISPR_ANALYZER.SUMMARIZE_CRISPR_ANALYSIS
+2025-03-05 01:28:46 [runtime] (disabled)        ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.COUNT_ANALYZER._CRISPR_ANALYZER.SUMMARIZE_CRISPR_ANALYSIS
+2025-03-05 01:28:46 [runtime] (disabled)        ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.COUNT_ANALYZER._CRISPR_ANALYZER
+2025-03-05 01:28:52 [runtime] (chunks_complete) ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.MULTI_REPORTER.SUMMARIZE_REPORTS
+2025-03-05 01:28:52 [runtime] (ready)           ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.MULTI_REPORTER.CLOUPE_PREPROCESS
+2025-03-05 01:28:52 [runtime] (run:local)       ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.MULTI_REPORTER.CLOUPE_PREPROCESS.fork0.split
+2025-03-05 01:28:52 [runtime] (disabled)        ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.MULTI_WEBSUMMARY_BUILDER
+2025-03-05 01:28:54 [runtime] (split_complete)  ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.MULTI_REPORTER.CLOUPE_PREPROCESS
+2025-03-05 01:28:54 [runtime] (run:local)       ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.MULTI_REPORTER.CLOUPE_PREPROCESS.fork0.chnk0.main
+2025-03-05 01:29:06 [runtime] (chunks_complete) ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.MULTI_REPORTER.CLOUPE_PREPROCESS
+2025-03-05 01:29:06 [runtime] (run:local)       ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.MULTI_REPORTER.CLOUPE_PREPROCESS.fork0.join
+2025-03-05 01:29:07 [runtime] (join_complete)   ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.MULTI_REPORTER.CLOUPE_PREPROCESS
+2025-03-05 01:29:07 [runtime] (ready)           ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.MULTI_REPORTER.CHOOSE_CLOUPE
+2025-03-05 01:29:07 [runtime] (run:local)       ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.MULTI_REPORTER.CHOOSE_CLOUPE.fork0.chnk0.main
+2025-03-05 01:29:07 [runtime] (chunks_complete) ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.MULTI_REPORTER.CHOOSE_CLOUPE
+2025-03-05 01:29:08 [runtime] VDR killed 288 files, 31 GB.
+
+Outputs:
+- Run summary HTML:                         /anvil/scratch/x-liu2302/unit1_demo/data/cellranger/Control-CAF/outs/web_summary.html
+- Run summary CSV:                          /anvil/scratch/x-liu2302/unit1_demo/data/cellranger/Control-CAF/outs/metrics_summary.csv
+- BAM:                                      /anvil/scratch/x-liu2302/unit1_demo/data/cellranger/Control-CAF/outs/possorted_genome_bam.bam
+- BAM index:                                /anvil/scratch/x-liu2302/unit1_demo/data/cellranger/Control-CAF/outs/possorted_genome_bam.bam.bai
+- Filtered feature-barcode matrices MEX:    /anvil/scratch/x-liu2302/unit1_demo/data/cellranger/Control-CAF/outs/filtered_feature_bc_matrix
+- Filtered feature-barcode matrices HDF5:   /anvil/scratch/x-liu2302/unit1_demo/data/cellranger/Control-CAF/outs/filtered_feature_bc_matrix.h5
+- Unfiltered feature-barcode matrices MEX:  /anvil/scratch/x-liu2302/unit1_demo/data/cellranger/Control-CAF/outs/raw_feature_bc_matrix
+- Unfiltered feature-barcode matrices HDF5: /anvil/scratch/x-liu2302/unit1_demo/data/cellranger/Control-CAF/outs/raw_feature_bc_matrix.h5
+- Secondary analysis output CSV:            /anvil/scratch/x-liu2302/unit1_demo/data/cellranger/Control-CAF/outs/analysis
+- Per-molecule read information:            /anvil/scratch/x-liu2302/unit1_demo/data/cellranger/Control-CAF/outs/molecule_info.h5
+- CRISPR-specific analysis:                 null
+- CSP-specific analysis:                    null
+- Loupe Browser file:                       /anvil/scratch/x-liu2302/unit1_demo/data/cellranger/Control-CAF/outs/cloupe.cloupe
+- Feature Reference:                        null
+- Target Panel File:                        null
+- Probe Set File:                           null
+
+2025-03-05 01:29:08 [perform] Serializing pipestance performance data.
+Waiting 6 seconds for UI to do final refresh.
+Pipestance completed successfully!
+
+2025-03-05 01:29:14 Shutting down.
+2025-03-05 01:29:14 [jobmngr] Highest memory usage observed: {
+  "rss": 29836959744,
+  "shared": 468238336,
+  "vmem": 34236272640,
+  "text": 245800960,
+  "stack": 30530691072,
+  "proc_count": 204
+}

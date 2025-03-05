@@ -1,0 +1,19 @@
+{
+    "count": 1,
+    "size": 158736177,
+    "timestamp": "2025-03-05 01:02:01",
+    "paths": [
+        "/anvil/scratch/x-liu2302/unit1_demo/data/cellranger/Control-CAF/SC_RNA_COUNTER_CS/FULL_COUNT_INPUTS/WRITE_GENE_INDEX/fork0/chnk0-u6a73c7e8be/files/gene_index.json"
+    ],
+    "errors": null,
+    "events": [
+        {
+            "Timestamp": "2025-03-05T01:01:34-05:00",
+            "DeltaBytes": 158742339
+        },
+        {
+            "Timestamp": "2025-03-05T01:02:01.880653485-05:00",
+            "DeltaBytes": -158736177
+        }
+    ]
+}

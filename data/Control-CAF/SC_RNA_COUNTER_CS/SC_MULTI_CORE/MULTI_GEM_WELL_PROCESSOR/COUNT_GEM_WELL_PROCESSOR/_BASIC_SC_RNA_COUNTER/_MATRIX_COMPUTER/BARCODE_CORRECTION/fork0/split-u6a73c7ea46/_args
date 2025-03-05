@@ -1,0 +1,38 @@
+{
+    "barcode_counts": "/anvil/scratch/x-liu2302/unit1_demo/data/cellranger/Control-CAF/SC_RNA_COUNTER_CS/SC_MULTI_CORE/MULTI_GEM_WELL_PROCESSOR/COUNT_GEM_WELL_PROCESSOR/_BASIC_SC_RNA_COUNTER/_MATRIX_COMPUTER/MAKE_SHARD/fork0/join-u6a73c7e8ed/files/barcode_counts.bcc.bincode",
+    "barcode_segment_counts": "/anvil/scratch/x-liu2302/unit1_demo/data/cellranger/Control-CAF/SC_RNA_COUNTER_CS/SC_MULTI_CORE/MULTI_GEM_WELL_PROCESSOR/COUNT_GEM_WELL_PROCESSOR/_BASIC_SC_RNA_COUNTER/_MATRIX_COMPUTER/MAKE_SHARD/fork0/join-u6a73c7e8ed/files/barcode_segment_counts.bsc.bincode",
+    "chemistry_def": {
+        "barcode": [
+            {
+                "kind": "gel_bead",
+                "length": 16,
+                "offset": 0,
+                "read_type": "R1",
+                "whitelist": "737K-august-2016"
+            }
+        ],
+        "description": "Single Cell 3' v2",
+        "endedness": "three_prime",
+        "name": "SC3Pv2",
+        "rna": {
+            "length": null,
+            "min_length": null,
+            "offset": 0,
+            "read_type": "R2"
+        },
+        "rna2": null,
+        "strandedness": "+",
+        "umi": {
+            "length": 10,
+            "min_length": null,
+            "offset": 16,
+            "read_type": "R1"
+        }
+    },
+    "gem_well": 1,
+    "invalid_uncorrected": [
+        "/anvil/scratch/x-liu2302/unit1_demo/data/cellranger/Control-CAF/SC_RNA_COUNTER_CS/SC_MULTI_CORE/MULTI_GEM_WELL_PROCESSOR/COUNT_GEM_WELL_PROCESSOR/_BASIC_SC_RNA_COUNTER/_MATRIX_COMPUTER/MAKE_SHARD/fork0/chnk0-u6a73c7e8f3/files/invalid.shard"
+    ],
+    "libraries_to_translate": [],
+    "valid_read_metrics": "/anvil/scratch/x-liu2302/unit1_demo/data/cellranger/Control-CAF/SC_RNA_COUNTER_CS/SC_MULTI_CORE/MULTI_GEM_WELL_PROCESSOR/COUNT_GEM_WELL_PROCESSOR/_BASIC_SC_RNA_COUNTER/_MATRIX_COMPUTER/MAKE_SHARD/fork0/join-u6a73c7e8ed/files/bc_correct_summary.bcm.bincode"
+}

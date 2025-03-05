@@ -1,0 +1,16 @@
+{
+    "__mem_gb": 2,
+    "__threads": 4,
+    "__vmem_gb": 5,
+    "balltree_leaf_size": null,
+    "input_pcs": null,
+    "matrix_h5": "/anvil/scratch/x-liu2302/unit1_demo/data/cellranger/Control-CAF/SC_RNA_COUNTER_CS/SC_MULTI_CORE/COUNT_ANALYZER/SC_RNA_ANALYZER/PREPROCESS_MATRIX/fork0/join-u6a73c7eee8/files/preprocessed_matrix_h5.h5",
+    "neighbor_a": null,
+    "neighbor_b": null,
+    "num_bcs": null,
+    "num_neighbors": null,
+    "pca_h5": "/anvil/scratch/x-liu2302/unit1_demo/data/cellranger/Control-CAF/SC_RNA_COUNTER_CS/SC_MULTI_CORE/COUNT_ANALYZER/SC_RNA_ANALYZER/CHOOSE_DIMENSION_REDUCTION_OUTPUT/fork0/chnk0-u6a73c7eef7/files/pca_h5.h5",
+    "random_seed": null,
+    "resolution": null,
+    "similarity_type": "nn"
+}

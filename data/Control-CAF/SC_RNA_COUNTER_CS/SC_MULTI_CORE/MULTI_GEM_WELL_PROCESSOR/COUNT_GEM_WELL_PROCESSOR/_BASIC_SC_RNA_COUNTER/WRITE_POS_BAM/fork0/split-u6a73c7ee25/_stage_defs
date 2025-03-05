@@ -1,0 +1,63 @@
+{
+  "chunks": [
+    {
+      "__mem_gb": 2,
+      "__threads": 2,
+      "__vmem_gb": null,
+      "range": {
+        "end": [
+          7,
+          67438155,
+          15007141530882641359,
+          3606701702,
+          16
+        ],
+        "start": null
+      },
+      "write_header": true
+    },
+    {
+      "__mem_gb": 2,
+      "__threads": 2,
+      "__vmem_gb": null,
+      "range": {
+        "end": [
+          16,
+          75971454,
+          4710977275606104225,
+          2445345913,
+          16
+        ],
+        "start": [
+          7,
+          67438155,
+          15007141530882641359,
+          3606701702,
+          16
+        ]
+      },
+      "write_header": false
+    },
+    {
+      "__mem_gb": 2,
+      "__threads": 2,
+      "__vmem_gb": null,
+      "range": {
+        "end": null,
+        "start": [
+          16,
+          75971454,
+          4710977275606104225,
+          2445345913,
+          16
+        ]
+      },
+      "write_header": false
+    }
+  ],
+  "join": {
+    "__mem_gb": 4,
+    "__threads": 4,
+    "__vmem_gb": null
+  }
+}

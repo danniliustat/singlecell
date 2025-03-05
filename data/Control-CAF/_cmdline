@@ -1,0 +1,1 @@
+/software/cellranger-6.1.1/cellranger count --id=Control-CAF --sample=030386_Control-CAF --transcriptome=/anvil/projects/x-tra220018/ref_files/cellranger//refdata-gex-GRCh38-2020-A/ --fastqs=/anvil/projects/x-tra220018/current/datasets/single_cellData/example --expect-cells=5000

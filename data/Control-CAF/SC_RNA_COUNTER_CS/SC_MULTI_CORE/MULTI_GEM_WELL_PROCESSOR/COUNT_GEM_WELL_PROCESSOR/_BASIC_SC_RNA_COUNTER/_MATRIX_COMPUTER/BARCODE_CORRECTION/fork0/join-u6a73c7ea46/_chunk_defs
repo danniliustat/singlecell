@@ -1,0 +1,36 @@
+[
+    {
+        "range": {
+            "end": {
+                "gem_group": 1,
+                "sequence": "CCCTCCTGGCGCTCCA",
+                "valid": false
+            },
+            "start": null
+        }
+    },
+    {
+        "range": {
+            "end": {
+                "gem_group": 1,
+                "sequence": "GGCAAAGATCCAAGAC",
+                "valid": false
+            },
+            "start": {
+                "gem_group": 1,
+                "sequence": "CCCTCCTGGCGCTCCA",
+                "valid": false
+            }
+        }
+    },
+    {
+        "range": {
+            "end": null,
+            "start": {
+                "gem_group": 1,
+                "sequence": "GGCAAAGATCCAAGAC",
+                "valid": false
+            }
+        }
+    }
+]

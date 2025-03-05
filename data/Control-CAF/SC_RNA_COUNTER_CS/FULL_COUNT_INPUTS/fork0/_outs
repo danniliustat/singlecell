@@ -1,0 +1,100 @@
+{
+    "aligner": null,
+    "cell_calling_config": {
+        "cell_barcodes": null,
+        "disable_ab_aggregate_detection": false,
+        "force_cells": null,
+        "override_library_types": null,
+        "override_mode": null,
+        "recovered_cells": 5000
+    },
+    "chemistry": "auto",
+    "count_allowed_chems": [
+        "auto",
+        "custom",
+        "threeprime",
+        "fiveprime",
+        "SC3P_auto",
+        "SC5P_auto",
+        "SC3Pv1",
+        "SC3Pv2",
+        "SC3Pv3",
+        "SC3Pv3LT",
+        "SC3Pv3HT",
+        "SC5P-PE",
+        "SC5P-R1",
+        "SC5P-R2",
+        "SC5PHT",
+        "SC-FB",
+        "ARC-v1"
+    ],
+    "custom_chemistry_def": null,
+    "enforce_library_concordance": true,
+    "feature_reference": null,
+    "force_sample_barcodes": null,
+    "gene_index": "/anvil/scratch/x-liu2302/unit1_demo/data/cellranger/Control-CAF/SC_RNA_COUNTER_CS/FULL_COUNT_INPUTS/WRITE_GENE_INDEX/fork0/chnk0-u6a73c7e8be/files/gene_index.json",
+    "genetic_demux_params": null,
+    "include_introns": false,
+    "initial_reads": null,
+    "min_assignment_confidence": null,
+    "no_bam": false,
+    "no_secondary_analysis": false,
+    "no_target_umi_filter": false,
+    "primer_initial_reads": null,
+    "primers": [
+        {
+            "name": "P5",
+            "seq": "AATGATACGGCGACCACCGAGATCT"
+        },
+        {
+            "name": "P7",
+            "seq": "CAAGCAGAAGACGGCATACGAGAT"
+        },
+        {
+            "name": "R1",
+            "seq": "ACACTCTTTCCCTACACGACG"
+        },
+        {
+            "name": "R2",
+            "seq": "GTGACTGGAGTTCAGACGTGTG"
+        },
+        {
+            "name": "switch_oligo",
+            "seq": "AAGCAGTGGTATCAACGCAGAGTACATGGG"
+        },
+        {
+            "name": "polyA",
+            "seq": "AAAAAAAAAAAAAAAAAAAA"
+        }
+    ],
+    "probe_barcodes_intended_pairing": null,
+    "r1_length": null,
+    "r2_length": null,
+    "reference_path": "/anvil/projects/x-tra220018/ref_files/cellranger/refdata-gex-GRCh38-2020-A",
+    "sample_def": [
+        {
+            "fastq_id": null,
+            "fastq_mode": "ILMN_BCL2FASTQ",
+            "gem_group": null,
+            "lanes": null,
+            "library_type": "Gene Expression",
+            "read_path": "/anvil/projects/x-tra220018/2024/datasets/single_cellData/example",
+            "sample_indices": [
+                "any"
+            ],
+            "sample_names": [
+                "030386_Control-CAF"
+            ],
+            "subsample_rate": null,
+            "target_set": null,
+            "target_set_name": null
+        }
+    ],
+    "special_genomic_regions": null,
+    "subsample_rate": null,
+    "targeting_method": null,
+    "tenx_cmos": null,
+    "throughput": null,
+    "trim_polya_min_score": 20,
+    "trim_tso_min_score": 20
+}

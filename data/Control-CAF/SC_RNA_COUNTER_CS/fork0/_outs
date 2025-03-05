@@ -1,0 +1,18 @@
+{
+    "analysis": "/anvil/scratch/x-liu2302/unit1_demo/data/cellranger/Control-CAF/outs/analysis",
+    "antibody_analysis": null,
+    "cloupe": "/anvil/scratch/x-liu2302/unit1_demo/data/cellranger/Control-CAF/outs/cloupe.cloupe",
+    "crispr_analysis": null,
+    "feature_reference": null,
+    "filtered_feature_bc_matrix": "/anvil/scratch/x-liu2302/unit1_demo/data/cellranger/Control-CAF/outs/filtered_feature_bc_matrix",
+    "filtered_feature_bc_matrix_h5": "/anvil/scratch/x-liu2302/unit1_demo/data/cellranger/Control-CAF/outs/filtered_feature_bc_matrix.h5",
+    "metrics_summary": "/anvil/scratch/x-liu2302/unit1_demo/data/cellranger/Control-CAF/outs/metrics_summary.csv",
+    "molecule_info": "/anvil/scratch/x-liu2302/unit1_demo/data/cellranger/Control-CAF/outs/molecule_info.h5",
+    "possorted_genome_bam": "/anvil/scratch/x-liu2302/unit1_demo/data/cellranger/Control-CAF/outs/possorted_genome_bam.bam",
+    "possorted_genome_bam_index": "/anvil/scratch/x-liu2302/unit1_demo/data/cellranger/Control-CAF/outs/possorted_genome_bam.bam.bai",
+    "probe_set": null,
+    "raw_feature_bc_matrix": "/anvil/scratch/x-liu2302/unit1_demo/data/cellranger/Control-CAF/outs/raw_feature_bc_matrix",
+    "raw_feature_bc_matrix_h5": "/anvil/scratch/x-liu2302/unit1_demo/data/cellranger/Control-CAF/outs/raw_feature_bc_matrix.h5",
+    "target_panel": null,
+    "web_summary": "/anvil/scratch/x-liu2302/unit1_demo/data/cellranger/Control-CAF/outs/web_summary.html"
+}

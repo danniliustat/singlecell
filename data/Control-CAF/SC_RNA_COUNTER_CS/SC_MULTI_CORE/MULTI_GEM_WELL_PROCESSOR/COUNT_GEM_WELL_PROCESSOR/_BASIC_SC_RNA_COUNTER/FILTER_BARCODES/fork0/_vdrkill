@@ -1,0 +1,33 @@
+{
+    "count": 3,
+    "size": 213327,
+    "timestamp": "2025-03-05 01:28:52",
+    "paths": [
+        "/anvil/scratch/x-liu2302/unit1_demo/data/cellranger/Control-CAF/SC_RNA_COUNTER_CS/SC_MULTI_CORE/MULTI_GEM_WELL_PROCESSOR/COUNT_GEM_WELL_PROCESSOR/_BASIC_SC_RNA_COUNTER/FILTER_BARCODES/fork0/join-u6a73c7ee2f/files/nonambient_calls.csv",
+        "/anvil/scratch/x-liu2302/unit1_demo/data/cellranger/Control-CAF/SC_RNA_COUNTER_CS/SC_MULTI_CORE/MULTI_GEM_WELL_PROCESSOR/COUNT_GEM_WELL_PROCESSOR/_BASIC_SC_RNA_COUNTER/FILTER_BARCODES/fork0/join-u6a73c7ee2f/files/summary.json",
+        "/anvil/scratch/x-liu2302/unit1_demo/data/cellranger/Control-CAF/SC_RNA_COUNTER_CS/SC_MULTI_CORE/MULTI_GEM_WELL_PROCESSOR/COUNT_GEM_WELL_PROCESSOR/_BASIC_SC_RNA_COUNTER/FILTER_BARCODES/fork0/join-u6a73c7ee2f/files/filtered_barcodes.csv"
+    ],
+    "errors": null,
+    "events": [
+        {
+            "Timestamp": "2025-03-05T01:24:47-05:00",
+            "DeltaBytes": 7296
+        },
+        {
+            "Timestamp": "2025-03-05T01:24:53-05:00",
+            "DeltaBytes": 37301210
+        },
+        {
+            "Timestamp": "2025-03-05T01:26:28.424824642-05:00",
+            "DeltaBytes": -108566
+        },
+        {
+            "Timestamp": "2025-03-05T01:28:45.965112799-05:00",
+            "DeltaBytes": -813
+        },
+        {
+            "Timestamp": "2025-03-05T01:28:52.506169048-05:00",
+            "DeltaBytes": -103948
+        }
+    ]
+}

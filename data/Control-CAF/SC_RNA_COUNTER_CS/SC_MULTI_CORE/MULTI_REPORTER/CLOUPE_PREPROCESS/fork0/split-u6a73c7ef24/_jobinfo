@@ -1,0 +1,182 @@
+{
+    "name": "ID.Control-CAF.SC_RNA_COUNTER_CS.SC_MULTI_CORE.MULTI_REPORTER.CLOUPE_PREPROCESS.fork0",
+    "pid": 2390535,
+    "host": "a204.anvil.rcac.purdue.edu",
+    "type": "local",
+    "cwd": "/anvil/scratch/x-liu2302/unit1_demo/data/cellranger/Control-CAF/SC_RNA_COUNTER_CS/SC_MULTI_CORE/MULTI_REPORTER/CLOUPE_PREPROCESS/fork0/split-u6a73c7ef24/files",
+    "python": {
+        "binpath": "/software/cellranger-6.1.1/external/anaconda/bin/python",
+        "version": "3.8.2 (default, Mar 26 2020, 15:53:00) \n[GCC 7.3.0]"
+    },
+    "rusage": {
+        "self": {
+            "ru_maxrss": 37472,
+            "ru_ixrss": 0,
+            "ru_idrss": 0,
+            "ru_minflt": 423,
+            "ru_majflt": 0,
+            "ru_nswap": 0,
+            "ru_utime": 0.000973,
+            "ru_stime": 0.005843,
+            "ru_inblock": 0,
+            "ru_oublock": 0,
+            "ru_msgsnd": 0,
+            "ru_msgrcv": 0,
+            "ru_nsignals": 0,
+            "ru_nivcsw": 2
+        },
+        "children": {
+            "ru_maxrss": 102296,
+            "ru_ixrss": 0,
+            "ru_idrss": 0,
+            "ru_minflt": 44745,
+            "ru_majflt": 0,
+            "ru_nswap": 0,
+            "ru_utime": 1.282875,
+            "ru_stime": 0.166974,
+            "ru_inblock": 16,
+            "ru_oublock": 0,
+            "ru_msgsnd": 0,
+            "ru_msgrcv": 0,
+            "ru_nsignals": 0,
+            "ru_nivcsw": 4
+        }
+    },
+    "used_bytes": {
+        "rss": 71573504,
+        "shared": 33157120,
+        "vmem": 1721032704,
+        "text": 4919296,
+        "stack": 274837504,
+        "proc_count": 1
+    },
+    "io": {
+        "total": {
+            "read": {
+                "sysc": 1005,
+                "bytes": 0
+            },
+            "write": {
+                "sysc": 9,
+                "bytes": 0
+            }
+        },
+        "max": {
+            "read": {
+                "sysc": 1991.5122465713202,
+                "bytes": 0
+            },
+            "write": {
+                "sysc": 17.941551770912795,
+                "bytes": 0
+            }
+        },
+        "dev": {
+            "read": {
+                "sysc": 12.571681201662164,
+                "bytes": 0
+            },
+            "write": {
+                "sysc": 1.4392258243172231,
+                "bytes": 0
+            }
+        }
+    },
+    "wallclock": {
+        "start": "2025-03-05 01:28:52",
+        "end": "2025-03-05 01:28:54",
+        "duration_seconds": 1.4920663410000001
+    },
+    "threads": 1,
+    "memGB": 1,
+    "vmemGB": 4,
+    "profile_mode": "disable",
+    "stackvars_flag": "disable",
+    "monitor_flag": "disable",
+    "invocation": {
+        "call": "SC_RNA_COUNTER_CS",
+        "args": {
+            "aligner": null,
+            "chemistry": "auto",
+            "feature_reference": null,
+            "force_cells": null,
+            "include_introns": false,
+            "no_bam": false,
+            "no_secondary_analysis": false,
+            "no_target_umi_filter": false,
+            "r1_length": null,
+            "r2_length": null,
+            "recovered_cells": 5000,
+            "reference_path": "/anvil/projects/x-tra220018/ref_files/cellranger/refdata-gex-GRCh38-2020-A",
+            "sample_def": [
+                {
+                    "fastq_id": null,
+                    "fastq_mode": "ILMN_BCL2FASTQ",
+                    "gem_group": null,
+                    "lanes": null,
+                    "library_type": "Gene Expression",
+                    "read_path": "/anvil/projects/x-tra220018/2024/datasets/single_cellData/example",
+                    "sample_indices": [
+                        "any"
+                    ],
+                    "sample_names": [
+                        "030386_Control-CAF"
+                    ],
+                    "subsample_rate": null,
+                    "target_set": null,
+                    "target_set_name": null
+                }
+            ],
+            "sample_desc": "",
+            "sample_id": "Control-CAF",
+            "targeting_method": null,
+            "trim_polya_min_score": 20,
+            "trim_tso_min_score": 20
+        },
+        "mro_file": "rna/sc_rna_counter_cs.mro"
+    },
+    "version": {
+        "martian": "v4.0.6",
+        "pipelines": "cellranger-6.1.1"
+    },
+    "sge": {
+        "SLURM_CLUSTER_NAME": "anvil",
+        "SLURM_CONF": "/var/spool/slurm/conf-cache/slurm.conf",
+        "SLURM_CPUS_ON_NODE": "20",
+        "SLURM_EXPORT_ENV": "NONE",
+        "SLURM_GET_USER_ENV": "1",
+        "SLURM_GPUS_PER_NODE": "0",
+        "SLURM_GTIDS": "0",
+        "SLURM_JOBID": "9816841",
+        "SLURM_JOB_ACCOUNT": "tra220018",
+        "SLURM_JOB_CPUS_PER_NODE": "20",
+        "SLURM_JOB_END_TIME": "1741170936",
+        "SLURM_JOB_GID": "7001326",
+        "SLURM_JOB_ID": "9816841",
+        "SLURM_JOB_NAME": "OnDemand/Jupyter",
+        "SLURM_JOB_NODELIST": "a204",
+        "SLURM_JOB_NUM_NODES": "1",
+        "SLURM_JOB_PARTITION": "shared",
+        "SLURM_JOB_QOS": "cpu",
+        "SLURM_JOB_START_TIME": "1741152936",
+        "SLURM_JOB_UID": "7044184",
+        "SLURM_JOB_USER": "x-liu2302",
+        "SLURM_LOCALID": "0",
+        "SLURM_MEM_PER_CPU": "1896",
+        "SLURM_NNODES": "1",
+        "SLURM_NODEID": "0",
+        "SLURM_NODELIST": "a204",
+        "SLURM_NPROCS": "20",
+        "SLURM_NTASKS": "20",
+        "SLURM_NTASKS_PER_NODE": "20",
+        "SLURM_PRIO_PROCESS": "0",
+        "SLURM_PROCID": "0",
+        "SLURM_SCRIPT_CONTEXT": "prolog_task",
+        "SLURM_SUBMIT_DIR": "/var/www/ood/apps/sys/dashboard",
+        "SLURM_SUBMIT_HOST": "ondemand.anvil.rcac.purdue.edu",
+        "SLURM_TASKS_PER_NODE": "20",
+        "SLURM_TASK_PID": "2382488",
+        "SLURM_TOPOLOGY_ADDR": "ibsw[23-32].ibsw11.a204",
+        "SLURM_TOPOLOGY_ADDR_PATTERN": "switch.switch.node"
+    }
+}

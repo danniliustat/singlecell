@@ -1,0 +1,42 @@
+[stdout]
+Number of fastq units = 1
+Sampling reads from: Sample 030386_Control-CAF in "/anvil/projects/x-tra220018/2024/datasets/single_cellData/example"
+Potential chemistries: {ThreePrimeV2, ThreePrimeV3LT, ThreePrimeV3HT, FivePrimeR2, FivePrimePE, ThreePrimeV3, ThreePrimeV1}
+
+
+Length based filtering for Sample 030386_Control-CAF in "/anvil/projects/x-tra220018/2024/datasets/single_cellData/example"
+LengthStats {
+    median: {
+        R2: 151,
+        I1: 0,
+        R1: 151,
+    },
+}
+Compatible chemistries: {ThreePrimeV3LT, FivePrimeR2, FivePrimePE, ThreePrimeV3, ThreePrimeV3HT, ThreePrimeV2}
+Result: {ThreePrimeV3HT, FivePrimeR2, FivePrimePE, ThreePrimeV3, ThreePrimeV1, ThreePrimeV2, ThreePrimeV3LT}
+After length filter: {ThreePrimeV3HT, FivePrimePE, ThreePrimeV3LT, ThreePrimeV2, ThreePrimeV3}
+
+
+Whitelist based filtering for Sample 030386_Control-CAF in "/anvil/projects/x-tra220018/2024/datasets/single_cellData/example"
+{
+    FivePrimePE: 0.96546,
+    ThreePrimeV2: 0.96546,
+    ThreePrimeV3: 0.10449,
+    ThreePrimeV3LT: 0.00015,
+    ThreePrimeV3HT: 0.10449,
+}
+Compatible chemistries: {ThreePrimeV2, FivePrimePE}
+Result: {ThreePrimeV3LT, ThreePrimeV2, ThreePrimeV3, ThreePrimeV3HT, FivePrimePE}
+After whitelist filter: {ThreePrimeV2, FivePrimePE}
+
+
+Mapping based filtering for Sample 030386_Control-CAF in "/anvil/projects/x-tra220018/2024/datasets/single_cellData/example"
+MappingStats {
+    total_reads: 100000,
+    sense_reads: 68122,
+    antisense_reads: 1653,
+    conf_mapped_reads: 87957,
+}
+Compatible chemistries: {ThreePrimeV2}
+Result: {ThreePrimeV2, FivePrimePE}
+After mapping filter: {ThreePrimeV2}

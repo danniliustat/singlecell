@@ -1,0 +1,29 @@
+2025-03-05 01:28:08 [time] __start__
+2025-03-05 01:28:08 [monitor] cgroup memory limit of 39762001920 bytes detected
+2025-03-05 01:28:08 [umap_rs::fuzzy] >>>>>>non_zero rows counts 161212
+2025-03-05 01:28:08 [umap_rs::embedding] initialization for 3998 samples took 0.009s
+2025-03-05 01:28:08 [umap_rs::embedding] The 0th eigenvalue estimation did not converge!
+2025-03-05 01:28:08 [umap_rs::embedding] Too large deviation of residual norm: 0.000016526766677427603 > 1e-5
+2025-03-05 01:28:08 [umap_rs::embedding] The 1th eigenvalue estimation did not converge!
+2025-03-05 01:28:08 [umap_rs::embedding] Too large deviation of residual norm: 0.002833987944174105 > 1e-5
+2025-03-05 01:28:08 [umap_rs::embedding] The 2th eigenvalue estimation did not converge!
+2025-03-05 01:28:08 [umap_rs::embedding] Too large deviation of residual norm: 0.006164869381533446 > 1e-5
+2025-03-05 01:28:08 [umap_rs::curve_fit] >>>>iterations 1
+2025-03-05 01:28:08 [umap_rs::curve_fit] >>>>iterations 2
+2025-03-05 01:28:08 [umap_rs::curve_fit] >>>>iterations 3
+2025-03-05 01:28:08 [umap_rs::curve_fit] >>>>iterations 4
+2025-03-05 01:28:08 [umap_rs::curve_fit] >>>>iterations 5
+2025-03-05 01:28:08 [umap_rs::curve_fit] >>>>iterations 6
+2025-03-05 01:28:08 [umap_rs::curve_fit] >>>>iterations 7
+2025-03-05 01:28:08 [umap_rs::curve_fit] >>>>iterations 8
+2025-03-05 01:28:08 [umap_rs::curve_fit] >>>>iterations 9
+2025-03-05 01:28:08 [umap_rs::curve_fit] >>>>iterations 10
+2025-03-05 01:28:08 [umap_rs::curve_fit] 	 #Chi2:	0.065547
+2025-03-05 01:28:08 [umap_rs::curve_fit] 	 #Red. Chi2:	0.000220
+2025-03-05 01:28:08 [umap_rs::curve_fit] 	 #R2:	0.997757
+2025-03-05 01:28:08 [umap_rs::curve_fit] 	 #Func. Evaluations:	10
+2025-03-05 01:28:08 [umap_rs::curve_fit] 	 #Converged by:	Parameters converged
+2025-03-05 01:28:08 [umap_rs::curve_fit] ---- Parameters ----
+2025-03-05 01:28:08 [umap_rs::curve_fit] 0.99214646 +/- 0.00565483 (0.57 %)	(init: 2)
+2025-03-05 01:28:08 [umap_rs::curve_fit] 1.11200188 +/- 0.00583577 (0.52 %)	(init: 1)
+2025-03-05 01:28:31 [time] __end__

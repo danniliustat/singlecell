@@ -1,0 +1,91 @@
+@include "rna/_cr_lib_stages.mro"
+
+call MAKE_SHARD(
+    chemistry_def          = {
+        barcode: [
+            {
+                kind:      "gel_bead",
+                length:    16,
+                offset:    0,
+                read_type: "R1",
+                whitelist: "737K-august-2016",
+            },
+        ],
+        description:  "Single Cell 3' v2",
+        endedness:    "three_prime",
+        name:         "SC3Pv2",
+        rna: {
+            length:     null,
+            min_length: null,
+            offset:     0,
+            read_type:  "R2",
+        },
+        rna2:         null,
+        strandedness: "+",
+        umi: {
+            length:     10,
+            min_length: null,
+            offset:     16,
+            read_type:  "R1",
+        },
+    },
+    gem_well               = 1,
+    read_chunks            = [
+        {
+            "chemistry": {
+                "barcode": [
+                    {
+                        "kind": "gel_bead",
+                        "length": 16,
+                        "offset": 0,
+                        "read_type": "R1",
+                        "whitelist": "737K-august-2016",
+                    },
+                ],
+                "description": "Single Cell 3' v2",
+                "endedness": "three_prime",
+                "name": "SC3Pv2",
+                "rna": {
+                    "length": null,
+                    "min_length": null,
+                    "offset": 0,
+                    "read_type": "R2",
+                },
+                "rna2": null,
+                "strandedness": "+",
+                "umi": {
+                    "length": 10,
+                    "min_length": null,
+                    "offset": 16,
+                    "read_type": "R1",
+                },
+            },
+            "chunk_id": 0,
+            "fastq_id": null,
+            "fastqs": {
+                "i1": null,
+                "i2": null,
+                "r1": "/anvil/projects/x-tra220018/2024/datasets/single_cellData/example/030386_Control-CAF_S1_L001_R1_001.fastq.gz",
+                "r1_interleaved": false,
+                "r2": "/anvil/projects/x-tra220018/2024/datasets/single_cellData/example/030386_Control-CAF_S1_L001_R2_001.fastq.gz",
+            },
+            "gem_group": 1,
+            "library_id": 0,
+            "library_type": "Gene Expression",
+            "read_group": "Control-CAF:0:1:H2J2YDSXX:1",
+            "read_lengths": {},
+            "subsample_rate": null,
+        },
+    ],
+    r1_length              = null,
+    r2_length              = null,
+    subsample_rate         = null,
+    initial_read_pairs     = null,
+    reference_path         = "/anvil/projects/x-tra220018/ref_files/cellranger/refdata-gex-GRCh38-2020-A",
+    feature_reference_path = null,
+    target_features        = null,
+    target_set             = null,
+    target_set_name        = null,
+    libraries_to_translate = [],
+    write_bc_counts_json   = false,
+)

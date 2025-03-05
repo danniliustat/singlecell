@@ -1,0 +1,17 @@
+2025-03-05 01:28:08 [time] __start__
+2025-03-05 01:28:08 [monitor] cgroup memory limit of 39762001920 bytes detected
+2025-03-05 01:28:08 [cr_ana::stages::graph_clustering] computing k-nearest neighbors with k = 202
+2025-03-05 01:28:08 [scan_rs::nn] constructing ball tree of 3998 points
+2025-03-05 01:28:08 [scan_rs::nn] querying points for 202 neighbors
+2025-03-05 01:28:08 [cr_ana::stages::graph_clustering] running louvain
+2025-03-05 01:28:08 [cr_ana::louvain] louvain starting cpm score: -0.000261
+2025-03-05 01:28:09 [cr_ana::louvain] louvain optimized in 23 iterations
+2025-03-05 01:28:09 [cr_ana::louvain] louvain final cpm score: 0.584519
+2025-03-05 01:28:09 [cr_ana::stages::graph_clustering] merging clusters
+2025-03-05 01:28:09 [scan_rs::merge_clusters] computing DE params on 19234 x 1517 matrix
+2025-03-05 01:28:09 [scan_rs::merge_clusters] computing DE on 861 vs 656 cells
+2025-03-05 01:28:09 [scan_rs::merge_clusters] computing DE params on 19234 x 524 matrix
+2025-03-05 01:28:10 [scan_rs::merge_clusters] computing DE on 312 vs 212 cells
+2025-03-05 01:28:10 [scan_rs::merge_clusters] computing DE params on 19234 x 775 matrix
+2025-03-05 01:28:10 [scan_rs::merge_clusters] computing DE on 440 vs 335 cells
+2025-03-05 01:28:10 [time] __end__

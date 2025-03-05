@@ -1,0 +1,16 @@
+{
+    "antibody_histograms": null,
+    "barcode_rank_plots": null,
+    "cloupe": "/anvil/scratch/x-liu2302/unit1_demo/data/cellranger/Control-CAF/SC_RNA_COUNTER_CS/SC_MULTI_CORE/MULTI_REPORTER/CHOOSE_CLOUPE/fork0/chnk0-u6a73c7ef33/files/cloupe.cloupe",
+    "cmo_tsne_plot": null,
+    "count_summary": {
+        "feature_reference": "/anvil/scratch/x-liu2302/unit1_demo/data/cellranger/Control-CAF/SC_RNA_COUNTER_CS/SC_MULTI_CORE/MULTI_REPORTER/SUMMARIZE_REPORTS/fork0/chnk0-u6a73c7ef1e/files/feature_reference.csv",
+        "metrics_summary_csv": "/anvil/scratch/x-liu2302/unit1_demo/data/cellranger/Control-CAF/SC_RNA_COUNTER_CS/SC_MULTI_CORE/MULTI_REPORTER/SUMMARIZE_REPORTS/fork0/chnk0-u6a73c7ef1e/files/metrics_summary_csv.csv",
+        "metrics_summary_json": "/anvil/scratch/x-liu2302/unit1_demo/data/cellranger/Control-CAF/SC_RNA_COUNTER_CS/SC_MULTI_CORE/MULTI_REPORTER/SUMMARIZE_REPORTS/fork0/chnk0-u6a73c7ef1e/files/metrics_summary_json.json",
+        "web_summary": "/anvil/scratch/x-liu2302/unit1_demo/data/cellranger/Control-CAF/SC_RNA_COUNTER_CS/SC_MULTI_CORE/MULTI_REPORTER/SUMMARIZE_REPORTS/fork0/chnk0-u6a73c7ef1e/files/web_summary.html",
+        "ws_data": "/anvil/scratch/x-liu2302/unit1_demo/data/cellranger/Control-CAF/SC_RNA_COUNTER_CS/SC_MULTI_CORE/MULTI_REPORTER/SUMMARIZE_REPORTS/fork0/chnk0-u6a73c7ef1e/files/ws_data.json"
+    },
+    "jibes_biplot_histogram": null,
+    "vdj_b_report": null,
+    "vdj_t_report": null
+}

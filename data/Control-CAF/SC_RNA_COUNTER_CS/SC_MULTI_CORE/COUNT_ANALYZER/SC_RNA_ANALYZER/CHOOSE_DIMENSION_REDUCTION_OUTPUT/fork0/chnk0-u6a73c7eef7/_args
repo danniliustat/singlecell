@@ -1,0 +1,13 @@
+{
+    "__mem_gb": 1,
+    "__threads": 1,
+    "__vmem_gb": 4,
+    "pca_csv_list": [
+        "/anvil/scratch/x-liu2302/unit1_demo/data/cellranger/Control-CAF/SC_RNA_COUNTER_CS/SC_MULTI_CORE/COUNT_ANALYZER/SC_RNA_ANALYZER/RUN_PCA/fork0/join-u6a73c7eef2/files/pca_csv",
+        null
+    ],
+    "pca_h5_list": [
+        "/anvil/scratch/x-liu2302/unit1_demo/data/cellranger/Control-CAF/SC_RNA_COUNTER_CS/SC_MULTI_CORE/COUNT_ANALYZER/SC_RNA_ANALYZER/RUN_PCA/fork0/join-u6a73c7eef2/files/pca_h5.h5",
+        null
+    ]
+}

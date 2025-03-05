@@ -1,0 +1,5 @@
+{
+    "multi_genome_csv": "/anvil/scratch/x-liu2302/unit1_demo/data/cellranger/Control-CAF/SC_RNA_COUNTER_CS/SC_MULTI_CORE/COUNT_ANALYZER/SC_RNA_ANALYZER/RUN_MULTIGENOME_ANALYSIS/fork0/join-u6a73c7eef2/files/multi_genome_csv",
+    "multi_genome_json": "/anvil/scratch/x-liu2302/unit1_demo/data/cellranger/Control-CAF/SC_RNA_COUNTER_CS/SC_MULTI_CORE/COUNT_ANALYZER/SC_RNA_ANALYZER/RUN_MULTIGENOME_ANALYSIS/fork0/join-u6a73c7eef2/files/multi_genome_json",
+    "multi_genome_summary": "/anvil/scratch/x-liu2302/unit1_demo/data/cellranger/Control-CAF/SC_RNA_COUNTER_CS/SC_MULTI_CORE/COUNT_ANALYZER/SC_RNA_ANALYZER/RUN_MULTIGENOME_ANALYSIS/fork0/join-u6a73c7eef2/files/multi_genome_summary.json"
+}

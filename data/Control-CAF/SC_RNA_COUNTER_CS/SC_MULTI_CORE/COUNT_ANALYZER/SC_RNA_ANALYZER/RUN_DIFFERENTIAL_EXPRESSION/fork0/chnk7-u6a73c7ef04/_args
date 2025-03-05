@@ -1,0 +1,36 @@
+{
+    "__mem_gb": 1,
+    "__threads": 1,
+    "__vmem_gb": 4,
+    "cluster_keys": [
+        {
+            "cluster_id": 3,
+            "cluster_type": "graphclust"
+        },
+        {
+            "cluster_id": 4,
+            "cluster_type": "graphclust"
+        },
+        {
+            "cluster_id": 5,
+            "cluster_type": "graphclust"
+        },
+        {
+            "cluster_id": 6,
+            "cluster_type": "graphclust"
+        },
+        {
+            "cluster_id": 7,
+            "cluster_type": "graphclust"
+        },
+        {
+            "cluster_id": 8,
+            "cluster_type": "graphclust"
+        }
+    ],
+    "clustering_h5": "/anvil/scratch/x-liu2302/unit1_demo/data/cellranger/Control-CAF/SC_RNA_COUNTER_CS/SC_MULTI_CORE/COUNT_ANALYZER/SC_RNA_ANALYZER/COMBINE_CLUSTERING/fork0/chnk0-u6a73c7ef03/files/clustering_h5.h5",
+    "is_antibody_only": false,
+    "matrix_h5": "/anvil/scratch/x-liu2302/unit1_demo/data/cellranger/Control-CAF/SC_RNA_COUNTER_CS/SC_MULTI_CORE/COUNT_ANALYZER/SC_RNA_ANALYZER/PREPROCESS_MATRIX/fork0/join-u6a73c7eee8/files/preprocessed_matrix_h5.h5",
+    "max_clusters": null,
+    "random_seed": null
+}

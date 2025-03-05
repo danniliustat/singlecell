@@ -1,0 +1,19 @@
+{
+    "count": 1,
+    "size": 2241575,
+    "timestamp": "2025-03-05 01:28:52",
+    "paths": [
+        "/anvil/scratch/x-liu2302/unit1_demo/data/cellranger/Control-CAF/SC_RNA_COUNTER_CS/SC_MULTI_CORE/MULTI_GEM_WELL_PROCESSOR/COUNT_GEM_WELL_PROCESSOR/_BASIC_SC_RNA_COUNTER/_MATRIX_COMPUTER/WRITE_BARCODE_SUMMARY/fork0/chnk0-u6a73c7ee25/files/barcode_summary.h5"
+    ],
+    "errors": null,
+    "events": [
+        {
+            "Timestamp": "2025-03-05T01:24:37-05:00",
+            "DeltaBytes": 2249324
+        },
+        {
+            "Timestamp": "2025-03-05T01:28:52.508556562-05:00",
+            "DeltaBytes": -2241575
+        }
+    ]
+}

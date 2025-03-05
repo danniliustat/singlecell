@@ -1,0 +1,107 @@
+@include "rna/_cr_lib_stages.mro"
+
+call ALIGN_AND_COUNT(
+    gem_well                    = 1,
+    read_chunks                 = [
+        {
+            "chemistry": {
+                "barcode": [
+                    {
+                        "kind": "gel_bead",
+                        "length": 16,
+                        "offset": 0,
+                        "read_type": "R1",
+                        "whitelist": "737K-august-2016",
+                    },
+                ],
+                "description": "Single Cell 3' v2",
+                "endedness": "three_prime",
+                "name": "SC3Pv2",
+                "rna": {
+                    "length": null,
+                    "min_length": null,
+                    "offset": 0,
+                    "read_type": "R2",
+                },
+                "rna2": null,
+                "strandedness": "+",
+                "umi": {
+                    "length": 10,
+                    "min_length": null,
+                    "offset": 16,
+                    "read_type": "R1",
+                },
+            },
+            "chunk_id": 0,
+            "fastq_id": null,
+            "fastqs": {
+                "i1": null,
+                "i2": null,
+                "r1": "/anvil/projects/x-tra220018/2024/datasets/single_cellData/example/030386_Control-CAF_S1_L001_R1_001.fastq.gz",
+                "r1_interleaved": false,
+                "r2": "/anvil/projects/x-tra220018/2024/datasets/single_cellData/example/030386_Control-CAF_S1_L001_R2_001.fastq.gz",
+            },
+            "gem_group": 1,
+            "library_id": 0,
+            "library_type": "Gene Expression",
+            "read_group": "Control-CAF:0:1:H2J2YDSXX:1",
+            "read_lengths": {},
+            "subsample_rate": null,
+        },
+    ],
+    reference_path              = "/anvil/projects/x-tra220018/ref_files/cellranger/refdata-gex-GRCh38-2020-A",
+    read_shards                 = {
+        corrected_reads: [
+            "/anvil/scratch/x-liu2302/unit1_demo/data/cellranger/Control-CAF/SC_RNA_COUNTER_CS/SC_MULTI_CORE/MULTI_GEM_WELL_PROCESSOR/COUNT_GEM_WELL_PROCESSOR/_BASIC_SC_RNA_COUNTER/_MATRIX_COMPUTER/BARCODE_CORRECTION/fork0/chnk0-u6a73c7ea46/files/valid_shard.shard",
+            "/anvil/scratch/x-liu2302/unit1_demo/data/cellranger/Control-CAF/SC_RNA_COUNTER_CS/SC_MULTI_CORE/MULTI_GEM_WELL_PROCESSOR/COUNT_GEM_WELL_PROCESSOR/_BASIC_SC_RNA_COUNTER/_MATRIX_COMPUTER/BARCODE_CORRECTION/fork0/chnk1-u6a73c7ea46/files/valid_shard.shard",
+            "/anvil/scratch/x-liu2302/unit1_demo/data/cellranger/Control-CAF/SC_RNA_COUNTER_CS/SC_MULTI_CORE/MULTI_GEM_WELL_PROCESSOR/COUNT_GEM_WELL_PROCESSOR/_BASIC_SC_RNA_COUNTER/_MATRIX_COMPUTER/BARCODE_CORRECTION/fork0/chnk2-u6a73c7ea46/files/valid_shard.shard",
+        ],
+        invalid_reads: [
+            "/anvil/scratch/x-liu2302/unit1_demo/data/cellranger/Control-CAF/SC_RNA_COUNTER_CS/SC_MULTI_CORE/MULTI_GEM_WELL_PROCESSOR/COUNT_GEM_WELL_PROCESSOR/_BASIC_SC_RNA_COUNTER/_MATRIX_COMPUTER/BARCODE_CORRECTION/fork0/chnk0-u6a73c7ea46/files/invalid_shard.shard",
+            "/anvil/scratch/x-liu2302/unit1_demo/data/cellranger/Control-CAF/SC_RNA_COUNTER_CS/SC_MULTI_CORE/MULTI_GEM_WELL_PROCESSOR/COUNT_GEM_WELL_PROCESSOR/_BASIC_SC_RNA_COUNTER/_MATRIX_COMPUTER/BARCODE_CORRECTION/fork0/chnk1-u6a73c7ea46/files/invalid_shard.shard",
+            "/anvil/scratch/x-liu2302/unit1_demo/data/cellranger/Control-CAF/SC_RNA_COUNTER_CS/SC_MULTI_CORE/MULTI_GEM_WELL_PROCESSOR/COUNT_GEM_WELL_PROCESSOR/_BASIC_SC_RNA_COUNTER/_MATRIX_COMPUTER/BARCODE_CORRECTION/fork0/chnk2-u6a73c7ea46/files/invalid_shard.shard",
+        ],
+        valid_reads: ["/anvil/scratch/x-liu2302/unit1_demo/data/cellranger/Control-CAF/SC_RNA_COUNTER_CS/SC_MULTI_CORE/MULTI_GEM_WELL_PROCESSOR/COUNT_GEM_WELL_PROCESSOR/_BASIC_SC_RNA_COUNTER/_MATRIX_COMPUTER/MAKE_SHARD/fork0/chnk0-u6a73c7e8f3/files/valid.shard"],
+    },
+    feature_counts              = "/anvil/scratch/x-liu2302/unit1_demo/data/cellranger/Control-CAF/SC_RNA_COUNTER_CS/SC_MULTI_CORE/MULTI_GEM_WELL_PROCESSOR/COUNT_GEM_WELL_PROCESSOR/_BASIC_SC_RNA_COUNTER/_MATRIX_COMPUTER/MAKE_SHARD/fork0/join-u6a73c7e8ed/files/feature_counts.fbc.bincode",
+    feature_reference           = "/anvil/scratch/x-liu2302/unit1_demo/data/cellranger/Control-CAF/SC_RNA_COUNTER_CS/SC_MULTI_CORE/MULTI_GEM_WELL_PROCESSOR/COUNT_GEM_WELL_PROCESSOR/_BASIC_SC_RNA_COUNTER/_MATRIX_COMPUTER/MAKE_SHARD/fork0/split-u6a73c7e8ed/files/feature_reference.frf.bincode",
+    target_set                  = null,
+    chemistry_def               = {
+        barcode: [
+            {
+                kind:      "gel_bead",
+                length:    16,
+                offset:    0,
+                read_type: "R1",
+                whitelist: "737K-august-2016",
+            },
+        ],
+        description:  "Single Cell 3' v2",
+        endedness:    "three_prime",
+        name:         "SC3Pv2",
+        rna: {
+            length:     null,
+            min_length: null,
+            offset:     0,
+            read_type:  "R2",
+        },
+        rna2:         null,
+        strandedness: "+",
+        umi: {
+            length:     10,
+            min_length: null,
+            offset:     16,
+            read_type:  "R1",
+        },
+    },
+    aligner                     = null,
+    aligner_subsample_rate      = null,
+    include_introns             = false,
+    is_pd                       = false,
+    targeted_umi_min_read_count = null,
+    transcriptome_min_score     = 30,
+    trim_polya_min_score        = 20,
+    trim_tso_min_score          = 20,
+    total_barcode_counts        = "/anvil/scratch/x-liu2302/unit1_demo/data/cellranger/Control-CAF/SC_RNA_COUNTER_CS/SC_MULTI_CORE/MULTI_GEM_WELL_PROCESSOR/COUNT_GEM_WELL_PROCESSOR/_BASIC_SC_RNA_COUNTER/_MATRIX_COMPUTER/BARCODE_CORRECTION/fork0/join-u6a73c7ea46/files/total_barcode_counts.tbcc.bincode",
+    barcode_subset              = null,
+)

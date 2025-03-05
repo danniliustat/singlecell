@@ -1,0 +1,8 @@
+{
+    "multi_pos_sorted_bam": null,
+    "pos_sorted_bam": {
+        "bam_file": "/anvil/scratch/x-liu2302/unit1_demo/data/cellranger/Control-CAF/SC_RNA_COUNTER_CS/SC_MULTI_CORE/MULTI_GEM_WELL_PROCESSOR/COUNT_GEM_WELL_PROCESSOR/_BASIC_SC_RNA_COUNTER/WRITE_POS_BAM/fork0/join-u6a73c7ee25/files/pos_sorted_non_multiplexed.bam",
+        "bam_index_file": "/anvil/scratch/x-liu2302/unit1_demo/data/cellranger/Control-CAF/SC_RNA_COUNTER_CS/SC_MULTI_CORE/MULTI_GEM_WELL_PROCESSOR/COUNT_GEM_WELL_PROCESSOR/_BASIC_SC_RNA_COUNTER/WRITE_POS_BAM/fork0/join-u6a73c7ee25/files/pos_sorted_non_multiplexed.bam.bai",
+        "sample": "non_multiplexed"
+    }
+}

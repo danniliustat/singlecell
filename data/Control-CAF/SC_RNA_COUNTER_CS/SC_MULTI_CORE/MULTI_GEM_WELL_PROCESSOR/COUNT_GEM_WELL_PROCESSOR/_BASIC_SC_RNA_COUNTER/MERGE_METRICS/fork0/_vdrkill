@@ -1,0 +1,19 @@
+{
+    "count": 1,
+    "size": 37151,
+    "timestamp": "2025-03-05 01:28:52",
+    "paths": [
+        "/anvil/scratch/x-liu2302/unit1_demo/data/cellranger/Control-CAF/SC_RNA_COUNTER_CS/SC_MULTI_CORE/MULTI_GEM_WELL_PROCESSOR/COUNT_GEM_WELL_PROCESSOR/_BASIC_SC_RNA_COUNTER/MERGE_METRICS/fork0/chnk0-u6a73c7ef1d/files/summary.json"
+    ],
+    "errors": null,
+    "events": [
+        {
+            "Timestamp": "2025-03-05T01:28:45-05:00",
+            "DeltaBytes": 43857
+        },
+        {
+            "Timestamp": "2025-03-05T01:28:52.507684801-05:00",
+            "DeltaBytes": -37151
+        }
+    ]
+}

@@ -1,0 +1,28 @@
+{
+    "count": 2,
+    "size": 20088084,
+    "timestamp": "2025-03-05 01:28:38",
+    "paths": [
+        "/anvil/scratch/x-liu2302/unit1_demo/data/cellranger/Control-CAF/SC_RNA_COUNTER_CS/SC_MULTI_CORE/COUNT_ANALYZER/SC_RNA_ANALYZER/PREPROCESS_MATRIX/fork0/join-u6a73c7eee8/files/cloupe_matrix_h5.h5",
+        "/anvil/scratch/x-liu2302/unit1_demo/data/cellranger/Control-CAF/SC_RNA_COUNTER_CS/SC_MULTI_CORE/COUNT_ANALYZER/SC_RNA_ANALYZER/PREPROCESS_MATRIX/fork0/join-u6a73c7eee8/files/preprocessed_matrix_h5.h5"
+    ],
+    "errors": null,
+    "events": [
+        {
+            "Timestamp": "2025-03-05T01:27:52-05:00",
+            "DeltaBytes": 6572
+        },
+        {
+            "Timestamp": "2025-03-05T01:27:56-05:00",
+            "DeltaBytes": 20096036
+        },
+        {
+            "Timestamp": "2025-03-05T01:28:02.550842435-05:00",
+            "DeltaBytes": -10283768
+        },
+        {
+            "Timestamp": "2025-03-05T01:28:38.118265852-05:00",
+            "DeltaBytes": -9804316
+        }
+    ]
+}

@@ -1,0 +1,20 @@
+{
+    "count": 8,
+    "size": 12011074,
+    "timestamp": "2025-03-05 01:28:38",
+    "paths": [
+        "/anvil/scratch/x-liu2302/unit1_demo/data/cellranger/Control-CAF/SC_RNA_COUNTER_CS/SC_MULTI_CORE/COUNT_ANALYZER/SC_RNA_ANALYZER/CHOOSE_DIMENSION_REDUCTION_OUTPUT/fork0/chnk0-u6a73c7eef7/files/pca_csv",
+        "/anvil/scratch/x-liu2302/unit1_demo/data/cellranger/Control-CAF/SC_RNA_COUNTER_CS/SC_MULTI_CORE/COUNT_ANALYZER/SC_RNA_ANALYZER/CHOOSE_DIMENSION_REDUCTION_OUTPUT/fork0/chnk0-u6a73c7eef7/files/pca_h5.h5"
+    ],
+    "errors": null,
+    "events": [
+        {
+            "Timestamp": "2025-03-05T01:28:07-05:00",
+            "DeltaBytes": 12018049
+        },
+        {
+            "Timestamp": "2025-03-05T01:28:38.115216862-05:00",
+            "DeltaBytes": -12011074
+        }
+    ]
+}

@@ -1,0 +1,30 @@
+{
+    "count": 8,
+    "size": 611846,
+    "timestamp": "2025-03-05 01:28:38",
+    "paths": [
+        "/anvil/scratch/x-liu2302/unit1_demo/data/cellranger/Control-CAF/SC_RNA_COUNTER_CS/SC_MULTI_CORE/COUNT_ANALYZER/SC_RNA_ANALYZER/RUN_TSNE/fork0/chnk0-u6a73c7eef8/files/tsne_csv",
+        "/anvil/scratch/x-liu2302/unit1_demo/data/cellranger/Control-CAF/SC_RNA_COUNTER_CS/SC_MULTI_CORE/COUNT_ANALYZER/SC_RNA_ANALYZER/RUN_TSNE/fork0/chnk0-u6a73c7eef8/files/tsne_h5.h5",
+        "/anvil/scratch/x-liu2302/unit1_demo/data/cellranger/Control-CAF/SC_RNA_COUNTER_CS/SC_MULTI_CORE/COUNT_ANALYZER/SC_RNA_ANALYZER/RUN_TSNE/fork0/join-u6a73c7eef8/files/tsne_csv",
+        "/anvil/scratch/x-liu2302/unit1_demo/data/cellranger/Control-CAF/SC_RNA_COUNTER_CS/SC_MULTI_CORE/COUNT_ANALYZER/SC_RNA_ANALYZER/RUN_TSNE/fork0/join-u6a73c7eef8/files/tsne_h5.h5"
+    ],
+    "errors": null,
+    "events": [
+        {
+            "Timestamp": "2025-03-05T01:28:08-05:00",
+            "DeltaBytes": 321278
+        },
+        {
+            "Timestamp": "2025-03-05T01:28:14-05:00",
+            "DeltaBytes": 313298
+        },
+        {
+            "Timestamp": "2025-03-05T01:28:14.205600843-05:00",
+            "DeltaBytes": -305923
+        },
+        {
+            "Timestamp": "2025-03-05T01:28:38.116949002-05:00",
+            "DeltaBytes": -305923
+        }
+    ]
+}

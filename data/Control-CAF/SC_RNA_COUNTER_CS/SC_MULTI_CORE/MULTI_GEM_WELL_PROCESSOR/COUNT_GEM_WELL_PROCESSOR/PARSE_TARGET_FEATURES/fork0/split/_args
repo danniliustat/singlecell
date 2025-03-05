@@ -1,0 +1,26 @@
+{
+    "gene_index": "/anvil/scratch/x-liu2302/unit1_demo/data/cellranger/Control-CAF/SC_RNA_COUNTER_CS/FULL_COUNT_INPUTS/WRITE_GENE_INDEX/fork0/chnk0-u6a73c7e8be/files/gene_index.json",
+    "no_probe_filter": false,
+    "no_target_umi_filter": false,
+    "reference_path": "/anvil/projects/x-tra220018/ref_files/cellranger/refdata-gex-GRCh38-2020-A",
+    "rps_limit": null,
+    "sample_def": [
+        {
+            "fastq_id": null,
+            "fastq_mode": "ILMN_BCL2FASTQ",
+            "gem_group": null,
+            "lanes": null,
+            "library_type": "Gene Expression",
+            "read_path": "/anvil/projects/x-tra220018/2024/datasets/single_cellData/example",
+            "sample_indices": [
+                "any"
+            ],
+            "sample_names": [
+                "030386_Control-CAF"
+            ],
+            "subsample_rate": null,
+            "target_set": null,
+            "target_set_name": null
+        }
+    ]
+}
